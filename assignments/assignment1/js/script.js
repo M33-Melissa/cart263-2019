@@ -15,9 +15,11 @@ disappearing eventually anyway.
 
 // Constants defining key quantities
 const AVATAR_SIZE_GAIN = 50;
-const AVATAR_SIZE_LOSS = 0.5;
-const FOOD_MAX_SPEED = 5;
+const AVATAR_SIZE_LOSS = 0.7;
+const FOOD_MAX_SPEED = 7;
 let score = 0;
+let textTransp = 0;
+let tSize = 0;
 
 // Avatar is an object defined by its properties
 let avatar = {
@@ -69,6 +71,17 @@ function draw() {
   // the rest of the draw loop
   if (!avatar.active) {
     // By using "return" the draw() function exits immediately
+    push();
+    tSize = constrain(tSize+1,0,height*2/3);
+    textSize(tSize);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    background(50);
+    textTransp = constrain(textTransp+0.5,0,200);
+    fill(250,0,0,textTransp);
+    text(score,width/2,height/2);
+    displayFood();
+    pop();
     return;
   }
 
