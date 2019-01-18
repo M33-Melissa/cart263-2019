@@ -6,13 +6,17 @@ Circle Eater
 Melissa Lim
 
 A simple game in which the player controls a shrinking circle with their mouse and tries
-to overlap another circle (food) in order to grow bigger.
+to overlap another circle (food) in order to grow bigger while it's moving away.
+The score is a commentary on society and how many angry corporate bosses
+you have to meet in hopes of finding a job. All is in vain because you end up
+disappearing eventually anyway.
 
 ******************/
 
 // Constants defining key quantities
 const AVATAR_SIZE_GAIN = 50;
 const AVATAR_SIZE_LOSS = 0.5;
+const FOOD_MAX_SPEED = 5;
 let score = 0;
 
 // Avatar is an object defined by its properties
@@ -31,7 +35,7 @@ let food = {
   y: 0,
   vx: 1,
   vy: 1,
-  maxSpeed: 5,
+  maxSpeed: FOOD_MAX_SPEED,
   size: 64,
   color: '#ff0000'
 }
@@ -103,7 +107,7 @@ function updateAvatar() {
 
 // updateFood()
 //
-//
+// update food position constrained to screen size
 function updateFood() {
   food.x = constrain(food.x + food.vx,0,width);
   food.y = constrain(food.y + food.vy,0,height);
@@ -111,6 +115,12 @@ function updateFood() {
     food.vx = -food.vx;
   } else if (food.y === 0 || food.y === height) {
     food.vy = -food.vy;
+  }
+
+  // reset random velocity at timeframe
+  if (frameCount%60 === 0) {
+    food.vx = random(-food.maxSpeed,food.maxSpeed);
+    food.vy = random(-food.maxSpeed,food.maxSpeed);
   }
 }
 
