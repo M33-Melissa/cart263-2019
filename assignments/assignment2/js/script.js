@@ -15,6 +15,7 @@ The player circle shrinks over time, but grows when it eats.
 // Constants for key quantities
 const AVATAR_MAX_SIZE = 64;
 const AVATAR_SIZE_LOSS_PER_FRAME = 1;
+const FOOD_MAX_SPEED = 7;
 const FOOD_MIN_SIZE = 5;
 const FOOD_MAX_SIZE = 100;
 
@@ -38,8 +39,8 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  avatar = new Avatar(mouseX,mouseY,AVATAR_MAX_SIZE,AVATAR_SIZE_LOSS_PER_FRAME)
-  food = new Food(random(0,width),random(0,height),FOOD_MIN_SIZE,FOOD_MAX_SIZE);
+  avatar = new Avatar(mouseX,mouseY,AVATAR_MAX_SIZE,AVATAR_SIZE_LOSS_PER_FRAME);
+  food = new Food(random(0,width),random(0,height),FOOD_MAX_SPEED,FOOD_MIN_SIZE,FOOD_MAX_SIZE);
   noCursor();
 }
 
@@ -59,4 +60,5 @@ function draw() {
   }
   avatar.display();
   food.display();
+  food.update();
 }
