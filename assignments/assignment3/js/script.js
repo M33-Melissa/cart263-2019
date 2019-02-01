@@ -70,8 +70,10 @@ function update() {
 function updateSpan() {
   let r = Math.random();
   if (r < 0.1) {
-    $(this).removeClass('redacted');
-    $(this).addClass('revealed');
+    if(!$(this).hasClass('secret')) {
+      $(this).removeClass('redacted');
+      $(this).addClass('revealed');
+    }
   }
 }
 

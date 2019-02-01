@@ -10,10 +10,13 @@ body {
   width: 800px;
   margin-left: 100px;
   margin-top: 100px;
+  text-align: justify;
+  background: linear-gradient(to left, #eecda3, #ef629f);
+  color: white;
 }
 
 div {
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 /* Redacted elements need to be blanked out */
@@ -27,18 +30,27 @@ div {
 .revealed {
   background-color: transparent;
   text-decoration: underline;
-  color: red;
+  color: #ff3232;
+  font-weight: bold;
 }
 
 .found {
-  background-color: pink;
+  background-color: #00CED1;
   text-decoration: none;
   color: white;
-  font-style: bold;
+  font-weight: bold;
 }
 
 #secret-count {
+  font-weight: bold;
   background-color: transparent;
   text-decoration: none;
-  color: black;
+  color: white;
+}
+
+#score {
+  font-weight: bold;
+  background-color: transparent;
+  text-decoration: none;
+  color: white;
 }
