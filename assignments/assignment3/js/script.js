@@ -28,7 +28,7 @@ function setup() {
   $spans.on('click',spanClicked);
   // Set an interval of 500 milliseconds to update the state of the page
   setInterval(update,500);
-
+  // Set a hover handler on the spans
   $spans.on('mouseover',secretHovered);
 };
 
@@ -43,13 +43,14 @@ function spanClicked() {
 
 // secretHovered()
 //
-//
+// Hovering your mouse over a secret reveals it and adds to the secrets counter.
 function secretHovered() {
   if($(this).hasClass('secret')) {
     $(this).removeClass('secret');
     $(this).addClass('found');
+    $(this).off('mouseover');
     numSecrets++;
-    document.getElementById('secret-count').innerText = numSecrets;
+    $('#secret-count').text(numSecrets);
   }
 }
 
