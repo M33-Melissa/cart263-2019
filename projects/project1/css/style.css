@@ -3,3 +3,51 @@
 This is the style file for this project.
 
 **********************************************/
+
+body {
+  font-family: sans-serif;
+}
+
+.elevator {
+  width: 40%;
+  position: fixed;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-color: grey;
+}
+
+#button .ui-selecting {
+}
+
+#button:hover {
+  cursor: pointer;
+}
+
+#button .ui-selected {
+  background: darkgrey;
+  color: red;
+  border-color: red;
+}
+
+#button .ui-state-default {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  background: darkgrey;
+  float: left;
+  width: 60px;
+  height: 60px;
+  font-size: 3em;
+  text-align: center;
+  border-width: thick;
+  border-radius: 50%;
+}
+
+#floor {
+  background-color: black;
+  color: red;
+  font-size: 4em;
+}
