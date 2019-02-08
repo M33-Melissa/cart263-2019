@@ -3,21 +3,27 @@
 This is the style file for this project.
 
 **********************************************/
+@import url('https://fonts.googleapis.com/css?family=VT323');
 
 body {
   font-family: sans-serif;
 }
 
 .elevator {
-  width: 40%;
   position: fixed;
+  width: 550px;
   height: 100%;
   right: 0;
   top: 0;
-  background-color: grey;
+  background-color: gray;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 99;
 }
 
 #button .ui-selecting {
+  background: darkgrey;
+  color: gray;
+  border-color: gray;
 }
 
 #button:hover {
@@ -31,23 +37,48 @@ body {
 }
 
 #button .ui-state-default {
-  margin: 0;
-  padding: 0;
-  width: 100%;
   margin: 5px;
-  padding: 5px;
+  margin-right: 20px;
+  padding: 0px;
+  padding-top: 10px;
   background: darkgrey;
-  float: left;
-  width: 60px;
+  position: relative;
+  float: right;
+  text-shadow: 2px 2px 1px #555555;
+  width: 70px;
   height: 60px;
-  font-size: 3em;
+  font-size: 40px;
+  top: 50px;
   text-align: center;
   border-width: thick;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
   border-radius: 50%;
 }
 
 #floor {
   background-color: black;
+  position: relative;
+  width: 200px;
+  left: 40%;
+  top: 20px;
+  text-align: left;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+
+#floorNum {
+  padding: 5px 40px;
+  margin-left: 10px;
   color: red;
-  font-size: 4em;
+  font-size: 100px;
+  font-family: 'VT323', monospace;
+}
+
+#doors {
+  width: 1000px;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: silver;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
