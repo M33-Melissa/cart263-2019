@@ -10,10 +10,10 @@ Zeus' office is on the last floor. Floor levels keeps appearing on each click.
 Therefore, resulting a long long elevator experience.
 
 ******************/
-// Store jQuery selection of all buttons, spans, and floor numbers
+// Store jQuery selection of all buttons, spans, and floor display
 let $buttons;
 let $spans;
-let $floorNums;
+let $floorDisplay;
 
 // Store floor number for display, and counter values for button adding
 let floorNum = 2;
@@ -38,9 +38,9 @@ function setup() {
 
   // Save the selection of all buttons
   $buttons = $("#button");
-  $floorNums = $("#floor");
+  $floorDisplay = $("#floor");
 
-  // Makes buttons selectable
+  // Makes buttons selectable, tolerance is set to fit so that the drag to select mutiple is more contained
   $buttons.selectable({
     tolerance: "fit"
   });
@@ -69,7 +69,7 @@ function buttonClicked(event, ui) {
   buttonSFX.playbackRate = 3.5;
   buttonSFX.play();
 
-  // Increment floor number, add buttons every click (recursive, therefore exponential depending on which button you click on)
+  // Increment floor number, add buttons every click
   numFloors++;
   $("<span class=\"ui-state-default\">"+numFloors+"</span>").insertAfter("p");
 }
@@ -83,7 +83,7 @@ function update() {
   floorSFX.play();
 
   // Change floor number and adds one for next
-  $floorNums.text(floorNum);
+  $floorDisplay.text(floorNum);
   floorNum++;
 
   // Door opening and closing animation
