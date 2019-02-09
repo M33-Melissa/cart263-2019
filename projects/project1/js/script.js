@@ -6,8 +6,8 @@ Melissa Lim
 
 Represent the story of Sisyphus on his way to his meeing with Zeus
 in order to receive the decision to his punishment.
-Zeus' office is on the last floor. With floor levels that keeps appearing.
-Therefore, resulting a long elevator experience.
+Zeus' office is on the last floor. Floor levels keeps appearing on each click.
+Therefore, resulting a long long elevator experience.
 
 ******************/
 // Store jQuery selection of all buttons, spans, and floor numbers
@@ -15,19 +15,14 @@ let $buttons;
 let $spans;
 let $floorNums;
 
-// Store floor number counter values
+// Store floor number for display, and counter values for button adding
 let floorNum = 2;
 let numFloors = 20;
 
-// Store door opening interval
-let doorInterval;
-
 // Store sound effects
-let playSound = false;
 let buttonSFX;
 let elevatorMusic;
 let floorSFX;
-
 
 // When the document is loaded we call the setup function
 $(document).ready(setup);
@@ -50,7 +45,7 @@ function setup() {
     tolerance: "fit"
   });
 
-  // Allow for multiple button selection
+  // Allow for multiple button selection and call for button trigger function
   $buttons.on("selectablestart",buttonClicked);
 
   // Set in interval to update the floor level
@@ -81,7 +76,7 @@ function buttonClicked(event, ui) {
 
 // update()
 //
-// Animates door opening, adding floor number
+// Animates door opening with sound, adding floor number to display
 function update() {
   // Arrived to floor level SFX
   floorSFX.volume = 0.5;
