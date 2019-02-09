@@ -23,6 +23,7 @@ let numFloors = 20;
 let doorInterval;
 
 // Store sound effects
+let playSound = false;
 let buttonSFX;
 let elevatorMusic;
 let floorSFX;
@@ -40,11 +41,6 @@ function setup() {
   elevatorMusic = new Audio("assets/sounds/elevator-music.mp3");
   floorSFX = new Audio("assets/sounds/ding.wav");
 
-  // Play background music
-  elevatorMusic.play();
-  elevatorMusic.loop = true;
-  elevatorMusic.volume = 0.3;
-
   // Save the selection of all buttons
   $buttons = $("#button");
   $floorNums = $("#floor");
@@ -55,31 +51,32 @@ function setup() {
   });
 
   // Allow for multiple button selection
-  $buttons.on("selectablestart", function (event, ui) {
-    event.originalEvent.ctrlKey = true;
-  });
-
-  // Set a click handler on the buttons
-  $spans = $("span");
-  $spans.on('click',buttonClicked);
+  $buttons.on("selectablestart",buttonClicked);
 
   // Set in interval to update the floor level
-  doorInterval = setInterval(update,7000);
+  setInterval(update,8000);
 }
 
 // buttonClicked()
 //
 // On button click, SFX plays and another floor button is added
-function buttonClicked() {
+function buttonClicked(event, ui) {
+  // Allows multiple buttons to be activated
+  event.originalEvent.ctrlKey = true;
+
+  // Play background music
+  elevatorMusic.loop = true;
+  elevatorMusic.volume = 0.3;
+  elevatorMusic.play();
 
   // Play button click SFX
-  buttonSFX.play();
+  buttonSFX.loop = false;
   buttonSFX.playbackRate = 3.5;
+  buttonSFX.play();
 
-  // Increment floor number, add buttons every click
+  // Increment floor number, add buttons every click (recursive, therefore exponential depending on which button you click on)
   numFloors++;
   $("<span class=\"ui-state-default\">"+numFloors+"</span>").insertAfter("p");
-  $("span").on('click',buttonClicked);
 }
 
 // update()
@@ -87,81 +84,93 @@ function buttonClicked() {
 // Animates door opening, adding floor number
 function update() {
   // Arrived to floor level SFX
-  floorSFX.play();
   floorSFX.volume = 0.5;
+  floorSFX.play();
 
   // Change floor number and adds one for next
   $floorNums.text(floorNum);
   floorNum++;
 
+  // Door opening and closing animation
+  $("#doors").animate({left: "60%"},1000,function(){});
+  $("#doors").delay(3000).animate({left: "0%"},1000,function(){});
+
   // Randomize images appearing behind doors
   if(floorNum > 3) {
-    randImage();
+    randomizeImage();
   }
-
-  // Door opening and closing animation
-  $("#doors").animate({left: "60%"},1000,function() {});
-  $("#doors").delay(2000).animate({left: "0%"},1000,function(){});
 }
 
 // randImage()
 //
-// Randomizes image that appears behind elevator doors
-function randImage() {
+// Randomized image that appears behind elevator doors
+function randomizeImage() {
 
-  let randNum = Math.random();
+  let randNum = Math.random()*10;
+  switch(Math.floor(randNum)) {
+    case 0:
+      $("#behindDoor img").attr("src", "assets/images/mountains.jpg");
+      $("#behindDoor img").attr("width", "200%");
+      $("body").css("background-color","white");
+      break;
 
-  if(randNum > 0.9) {
+    case 1:
+      $("#behindDoor img").attr("src", "assets/images/isabelle.gif");
+      $("#behindDoor img").attr("width", "250%");
+      $("body").css("background-color","grey");
+      break;
 
-    $("#behindDoor img").attr("src", "assets/images/djkhaled.gif");
-    $("#behindDoor img").attr("width", "200%");
+    case 2:
+      $("#behindDoor img").attr("src", "assets/images/pleiades.jpg");
+      $("#behindDoor img").attr("width", "70%");
+      $("body").css("background-color","black");
+      break;
 
-  } else if(randNum > 0.8) {
+    case 3:
+      $("#behindDoor img").attr("src", "assets/images/prairiedog-office.png");
+      $("#behindDoor img").attr("width", "150%");
+      $("body").css("background-color","white");
+      break;
 
-    $("#behindDoor img").attr("src", "assets/images/surprised-pikachu.png");
-    $("#behindDoor img").attr("width", "75%");
+    case 4:
+      $("#behindDoor img").attr("src", "assets/images/overwork.png");
+      $("#behindDoor img").attr("width", "65%");
+      $("body").css("background-color","green");
+      break;
 
-  } else if(randNum > 0.7) {
+    case 5:
+      $("#behindDoor img").attr("src", "assets/images/gnomed.png");
+      $("#behindDoor img").attr("width", "450%");
+      $("body").css("background-color","black");
+      break;
 
-    $("#behindDoor img").attr("src", "assets/images/thumbs-up.gif");
-    $("#behindDoor img").attr("width", "300%");
+    case 6:
+      $("#behindDoor img").attr("src", "assets/images/sisyphus-dwarves.JPG");
+      $("#behindDoor img").attr("width", "120%");
+      $("body").css("background-color","white");
+      break;
 
-  } else if(randNum > 0.6) {
+    case 7:
+      $("#behindDoor img").attr("src", "assets/images/thumbs-up.gif");
+      $("#behindDoor img").attr("width", "300%");
+      $("body").css("background-color","white");
+      break;
 
-    $("#behindDoor img").attr("src", "assets/images/sisyphus-dwarves.jpg");
-    $("#behindDoor img").attr("width", "120%");
+    case 8:
+      $("#behindDoor img").attr("src", "assets/images/surprised-pikachu.png");
+      $("#behindDoor img").attr("width", "75%");
+      $("body").css("background-color","white");
+      break;
 
-  } else if(randNum > 0.5) {
+    case 9:
+      $("#behindDoor img").attr("src", "assets/images/djkhaled.gif");
+      $("#behindDoor img").attr("width", "200%");
+      $("body").css("background-color","white");
+      break;
 
-    $("#behindDoor img").attr("src", "assets/images/gnomed.png");
-    $("#behindDoor img").attr("width", "400%");
-    $("body").css("background-color","black");
-
-  } else if(randNum > 0.4) {
-
-    $("#behindDoor img").attr("src", "assets/images/overwork.png");
-    $("#behindDoor img").attr("width", "65%");
-
-  } else if(randNum > 0.3) {
-
-    $("#behindDoor img").attr("src", "assets/images/prairiedog-office.png");
-    $("#behindDoor img").attr("width", "150%");
-
-  } else if(randNum > 0.2) {
-
-    $("#behindDoor img").attr("src", "assets/images/pleiades.jpg");
-    $("#behindDoor img").attr("width", "70%");
-
-  } else if(randNum > 0.1) {
-
-    $("#behindDoor img").attr("src", "assets/images/isabelle.gif");
-    $("#behindDoor img").attr("width", "250%");
-
-  } else if(randNum > 0) {
-
-    $("#behindDoor img").attr("src", "assets/images/mountains.jpg");
-    $("#behindDoor img").attr("width", "200%");
-    $("body").css("background-color","white");
-
+    default:
+      $("#behindDoor img").attr("src", "assets/images/office.jpg");
+      $("#behindDoor img").attr("width", "80%");
+      break;
   }
 }
