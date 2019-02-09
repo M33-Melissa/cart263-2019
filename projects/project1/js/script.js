@@ -91,14 +91,14 @@ function update() {
   $floorNums.text(floorNum);
   floorNum++;
 
-  // Door opening and closing animation
-  $("#doors").animate({left: "60%"},1000,function() {});
-  $("#doors").delay(2000).animate({left: "0%"},1000,function(){});
-
   // Randomize images appearing behind doors
   if(floorNum > 3) {
     randImage();
   }
+  
+  // Door opening and closing animation
+  $("#doors").animate({left: "60%"},1000,function() {});
+  $("#doors").delay(2000).animate({left: "0%"},1000,function(){});
 }
 
 // randImage()
