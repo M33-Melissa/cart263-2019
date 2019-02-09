@@ -40,6 +40,18 @@ function setup() {
   $buttons = $("#button");
   $floorDisplay = $("#floor");
 
+  // Popup message for narrative set up
+  $("#dialog-message").dialog({
+    modal: true,
+    buttons: {
+      Sigh: function() {
+        $(this).dialog("close");
+        playMusic();
+      }
+    }
+  });
+
+
   // Makes buttons selectable, tolerance is set to fit so that the drag to select mutiple is more contained
   $buttons.selectable({
     tolerance: "fit"
@@ -58,11 +70,6 @@ function setup() {
 function buttonClicked(event, ui) {
   // Allows multiple buttons to be activated
   event.originalEvent.ctrlKey = true;
-
-  // Play background music
-  elevatorMusic.loop = true;
-  elevatorMusic.volume = 0.3;
-  elevatorMusic.play();
 
   // Play button click SFX
   buttonSFX.loop = false;
@@ -104,68 +111,78 @@ function randomizeImage() {
   let randNum = Math.random()*10;
   switch(Math.floor(randNum)) {
     case 0:
-      $("#behindDoor img").attr("src", "assets/images/mountains.jpg");
-      $("#behindDoor img").attr("width", "200%");
-      $("body").css("background-color","white");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/mountains.jpg");
+    $("#behindDoor img").attr("width", "200%");
+    $("body").css("background-color","white");
+    break;
 
     case 1:
-      $("#behindDoor img").attr("src", "assets/images/isabelle.gif");
-      $("#behindDoor img").attr("width", "250%");
-      $("body").css("background-color","grey");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/isabelle.gif");
+    $("#behindDoor img").attr("width", "250%");
+    $("body").css("background-color","grey");
+    break;
 
     case 2:
-      $("#behindDoor img").attr("src", "assets/images/pleiades.jpg");
-      $("#behindDoor img").attr("width", "70%");
-      $("body").css("background-color","black");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/pleiades.jpg");
+    $("#behindDoor img").attr("width", "70%");
+    $("body").css("background-color","black");
+    break;
 
     case 3:
-      $("#behindDoor img").attr("src", "assets/images/prairiedog-office.png");
-      $("#behindDoor img").attr("width", "150%");
-      $("body").css("background-color","white");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/prairiedog-office.png");
+    $("#behindDoor img").attr("width", "150%");
+    $("body").css("background-color","white");
+    break;
 
     case 4:
-      $("#behindDoor img").attr("src", "assets/images/overwork.png");
-      $("#behindDoor img").attr("width", "65%");
-      $("body").css("background-color","green");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/overwork.png");
+    $("#behindDoor img").attr("width", "65%");
+    $("body").css("background-color","green");
+    break;
 
     case 5:
-      $("#behindDoor img").attr("src", "assets/images/gnomed.png");
-      $("#behindDoor img").attr("width", "450%");
-      $("body").css("background-color","black");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/gnomed.png");
+    $("#behindDoor img").attr("width", "450%");
+    $("body").css("background-color","black");
+    break;
 
     case 6:
-      $("#behindDoor img").attr("src", "assets/images/sisyphus-dwarves.JPG");
-      $("#behindDoor img").attr("width", "120%");
-      $("body").css("background-color","white");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/sisyphus-dwarves.JPG");
+    $("#behindDoor img").attr("width", "120%");
+    $("body").css("background-color","white");
+    break;
 
     case 7:
-      $("#behindDoor img").attr("src", "assets/images/thumbs-up.gif");
-      $("#behindDoor img").attr("width", "300%");
-      $("body").css("background-color","white");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/thumbs-up.gif");
+    $("#behindDoor img").attr("width", "300%");
+    $("body").css("background-color","white");
+    break;
 
     case 8:
-      $("#behindDoor img").attr("src", "assets/images/surprised-pikachu.png");
-      $("#behindDoor img").attr("width", "75%");
-      $("body").css("background-color","white");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/surprised-pikachu.png");
+    $("#behindDoor img").attr("width", "75%");
+    $("body").css("background-color","grey");
+    break;
 
     case 9:
-      $("#behindDoor img").attr("src", "assets/images/djkhaled.gif");
-      $("#behindDoor img").attr("width", "200%");
-      $("body").css("background-color","white");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/djkhaled.gif");
+    $("#behindDoor img").attr("width", "200%");
+    $("body").css("background-color","white");
+    break;
 
     default:
-      $("#behindDoor img").attr("src", "assets/images/office.jpg");
-      $("#behindDoor img").attr("width", "80%");
-      break;
+    $("#behindDoor img").attr("src", "assets/images/office.jpg");
+    $("#behindDoor img").attr("width", "80%");
+    break;
   }
+}
+
+// playMusic()
+//
+// Plays elevator music in loop
+function playMusic() {
+    // Play background music
+    elevatorMusic.loop = true;
+    elevatorMusic.volume = 0.3;
+    elevatorMusic.play();
 }
