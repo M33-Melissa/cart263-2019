@@ -12,14 +12,23 @@ This project was made using jQuery and jQuery UI for the buttons and animations.
 The variety of images that appear behind the door was found on archive.org, pngtree.com, Wikimedia Commons, unsplash.com, and others that were google search results. It combines into a mix of memes for comedy, office pictures to accompany the elevator setting, and a sprinkle of foreshadowing images of mountain landscapes and dwarves pushing on a rock in reference to the actual story of Sisyphus and his punishment of having to push a rock up a slippery mountain for eternity.
 
 References - Images:
+
 https://unsplash.com/photos/c7Ev87qEkRc
+
 https://dribbble.com/shots/3531543-Office-Environment-01#shot-description
+
 https://archive.org/details/SPITZ-ssc2007-07b
+
 https://commons.wikimedia.org/wiki/Category:Sisyphus
+
 https://pngtree.com/freepng/deadline-concept-overworked-businessman-under-a-lot-of-documents_3659889.html
+
 https://pngtree.com/freepng/three-dimensional-cartoon-hills_1177270.html
 
 References - Audio:
+
 https://www.youtube.com/watch?v=jj0ChLVTpaA
+
 https://freesound.org/people/tim.kahn/sounds/91926/
+
 https://freesound.org/people/Coral_Island_Studios/sounds/277643/
