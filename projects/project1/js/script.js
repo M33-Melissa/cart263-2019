@@ -23,9 +23,9 @@ let numFloors = 20;
 let doorInterval;
 
 // Store sound effects
-let buttonSFX = new Audio("assets/sounds/button.mp3");
-let elevatorMusic = new Audio("assets/sounds/elevator-music.mp3");
-let floorSFX = new Audio("assets/sounds/ding.wav");
+let buttonSFX;
+let elevatorMusic;
+let floorSFX;
 
 
 // When the document is loaded we call the setup function
@@ -35,6 +35,11 @@ $(document).ready(setup);
 //
 // Sets the handler for floor buttons click and floor level reached
 function setup() {
+  // Initialize audio
+  buttonSFX = new Audio("assets/sounds/button.mp3");
+  elevatorMusic = new Audio("assets/sounds/elevator-music.mp3");
+  floorSFX = new Audio("assets/sounds/ding.wav");
+
   // Play background music
   elevatorMusic.play();
   elevatorMusic.loop = true;
@@ -68,10 +73,8 @@ function setup() {
 function buttonClicked() {
 
   // Play button click SFX
-  if (!buttonSFX.isPlaying) {
-    buttonSFX.play();
-    buttonSFX.playbackRate = 3.5;
-  }
+  buttonSFX.play();
+  buttonSFX.playbackRate = 3.5;
 
   // Increment floor number, add buttons every click
   numFloors++;
@@ -95,7 +98,7 @@ function update() {
   if(floorNum > 3) {
     randImage();
   }
-  
+
   // Door opening and closing animation
   $("#doors").animate({left: "60%"},1000,function() {});
   $("#doors").delay(2000).animate({left: "0%"},1000,function(){});
