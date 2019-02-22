@@ -41,7 +41,13 @@ function setup() {
   // Get the fly element from the page
   $fly = $('#fly');
   // Make it draggable
-  $fly.draggable();
+  $fly.draggable({
+    start: function(event,ui) {
+      // Start up the buzzing of the fly
+      buzzSFX.loop = true;
+      buzzSFX.play();
+    }
+  });
 
   $food = $('#food');
 
@@ -51,10 +57,6 @@ function setup() {
       yuckSFX.play();
     }
   });
-
-  // Start up the buzzing of the fly
-  buzzSFX.loop = true;
-  buzzSFX.play();
 }
 
 // flyDropped(event,ui)
