@@ -4,6 +4,7 @@
 
 Eat Up
 Pippin Barr
+Modified by Melissa Lim
 
 Using jQuery UI's draggable and droppable methods to
 feed a hungry mouth!
@@ -11,13 +12,14 @@ feed a hungry mouth!
 Sounds:
 Buzzing: https://freesound.org/people/soundmary/sounds/194931/
 Chewing: https://freesound.org/people/InspectorJ/sounds/412068/
+Yucking: https://freesound.org/people/dorr1/sounds/338960/
 
 ******************/
 
 // Sound effects for the experience
 let buzzSFX = new Audio("assets/sounds/buzz.mp3");
 let crunchSFX = new Audio("assets/sounds/crunch.wav");
-let yuckSFX = new Audio("");
+let yuckSFX = new Audio("assets/sounds/yuck.mp3");
 
 // Variable to hold our two key elements
 let $mouth;
@@ -33,7 +35,7 @@ function setup() {
   $mouth.droppable({
     // The drop option specifies a function to call when a drop is completed
     drop: flyDropped,
-    accept: "#food"
+    accept: "#fly"
   });
 
   // Get the fly element from the page
@@ -45,7 +47,7 @@ function setup() {
 
   $food.draggable({
     revert: true,
-    activate: function(event, ui) {
+    start: function(event,ui) {
       yuckSFX.play();
     }
   });
