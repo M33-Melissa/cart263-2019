@@ -19,8 +19,8 @@ function setup() {
 
 function startGame() {
 
-    let word = "dog";
-    
+    $('#click-to-begin').remove();
+
     // Set some random numbers for the voice's pitch and rate parameters for a bit of fun
     let options = {
       pitch: Math.random(),
@@ -29,5 +29,5 @@ function startGame() {
 
     // Use ResponsiveVoice to speak the string we generated, with UK English Male voice
     // and the options we just specified.
-    responsiveVoice.speak(word,'UK English Male',options);
+    responsiveVoice.speak('dog','UK English Male',options);
 }
