@@ -163,6 +163,8 @@ let correctAnimal;
 // We also track all the possibly answers (mostly so we can switch their order around)
 let answers = [];
 
+let score = 0;
+
 // How many possible answers there are per round
 const NUM_OPTIONS = 5;
 
@@ -182,8 +184,17 @@ function setup() {
 // Remove the click to begin and set up a round of play
 function startGame() {
   $('#click-to-begin').remove();
-
+  $('#score').show();
   newRound();
+  if (annyang) {
+    var commands = {
+      'i give up': function() {
+        score = 0;
+        $("#score").text(score);
+        newRound();
+      }
+    }
+  }
 }
 
 // newRound()
@@ -236,6 +247,13 @@ function speakAnimal(name) {
   // Use ResponsiveVoice to speak the string we generated, with UK English Male voice
   // and the options we just specified.
   responsiveVoice.speak(reverseAnimal,'UK English Male',options);
+  if (annyang) {
+    var commands = {
+      'say it again': function() {
+        responsiveVoice.speak(reverseAnimal,'UK English Male',options);
+      }
+    }
+  }
 }
 
 // addButton(label)
@@ -253,12 +271,16 @@ function addButton(label) {
   $button.on('click',function () {
     // If the button they clicked on has a label matching the correct answer...
     if ($(this).text() === correctAnimal) {
+      score++;
+      $("#score").text(score);
       // Remove all the buttons
       $('.guess').remove();
       // Start a new round
       setTimeout(newRound,1000);
     }
     else {
+      score = 0;
+      $("#score").text(score);
       // Otherwise they were wrong, so shake the button
       $(this).effect('shake');
       // And say the correct animal again to "help" them

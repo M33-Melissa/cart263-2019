@@ -1,11 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Quantico');
+
 body {
   height: 100%;
   width: 100%;
-  /* overflow: hidden; */
+  background-color: #154360;
+  color: white;
+  overflow-x: hidden;
+  font-family: 'Quantico', sans-serif;
 }
 
 #click-to-begin {
   font-size: 2em;
   font-weight: bold;
-  text-align: center; 
+  text-align: center;
+}
+
+#score {
+  float: right;
+  padding-right: 50px;
+  font-size: 4em;
+  color: orangered;
+}
+
+.ui-button {
+   font-size: 3em !important;
+   width: 50%;
+   margin: 10px !important;
+   margin-left: 20% !important;
+   font-family: 'Quantico', sans-serif !important;
 }
