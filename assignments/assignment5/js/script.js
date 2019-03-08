@@ -5,6 +5,8 @@
 Slamina
 rraB nippiP
 
+Modified by Melissa Lim
+
 A simple guessing game based on voice synthesis. The computer reads out an
 animal name, but it reads it backwards. The user selects the animal they
 think it is and either gets it right or wrong. If right, a new level is generated.
@@ -186,15 +188,7 @@ function startGame() {
   $('#click-to-begin').remove();
   $('#score').show();
   newRound();
-  if (annyang) {
-    var commands = {
-      'i give up': function() {
-        score = 0;
-        $("#score").text(score);
-        newRound();
-      }
-    }
-  }
+  useAnnyang();
 }
 
 // newRound()
@@ -219,6 +213,7 @@ function newRound() {
 
   // Say the name of the animal
   speakAnimal(correctAnimal);
+
 }
 
 // speakAnimal(name)
@@ -247,13 +242,6 @@ function speakAnimal(name) {
   // Use ResponsiveVoice to speak the string we generated, with UK English Male voice
   // and the options we just specified.
   responsiveVoice.speak(reverseAnimal,'UK English Male',options);
-  if (annyang) {
-    var commands = {
-      'say it again': function() {
-        responsiveVoice.speak(reverseAnimal,'UK English Male',options);
-      }
-    }
-  }
 }
 
 // addButton(label)
@@ -280,7 +268,7 @@ function addButton(label) {
     }
     else {
       score = 0;
-      $("#score").text(score);
+      $("#score").text(score).effect('shake');
       // Otherwise they were wrong, so shake the button
       $(this).effect('shake');
       // And say the correct animal again to "help" them
@@ -290,4 +278,45 @@ function addButton(label) {
 
   // Finally, add the button to the page so we can see it
   $('body').append($button);
+}
+
+function useAnnyang() {
+
+  if (annyang) {
+    var commands = {
+
+      'say it again': function() {
+        speakAnimal(correctAnimal);
+      },
+
+      'i give up': function() {
+        score = 0;
+        $("#score").text(score).effect('shake');
+
+        // Remove all the buttons
+        $('.guess').remove();
+        // Start a new round
+        setTimeout(newRound,1000);
+      },
+
+      'i think it is *answer': function(answer) {
+        console.log(answer);
+        if (correctAnimal === answer.toLowerCase()) {
+          score++;
+          $("#score").text(score);
+          // Remove all the buttons
+          $('.guess').remove();
+          // Start a new round
+          setTimeout(newRound,1000);
+        } else {
+          // Otherwise they were wrong, so shake the button
+          $("#score").text(score).effect('shake');
+          // And say the correct animal again to "help" them
+          speakAnimal(correctAnimal);
+        }
+      }
+    }
+  }
+  annyang.addCommands(commands);
+  annyang.start();
 }
