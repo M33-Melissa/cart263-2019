@@ -25,6 +25,17 @@ let randomYPosition = "";
 
 function setup() {
   $('#click-to-begin').on('click',startGame);
+
+  $('#dialog-message').dialog({
+    modal: true,
+    buttons: {
+      Begin: function() {
+        $(this).dialog('close');
+        startGame();
+      }
+    }
+  });
+
   $circle = $('#circle');
 }
 

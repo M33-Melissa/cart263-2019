@@ -18,9 +18,9 @@ body {
   font-size: 1.3em !important;
 }
 
-#click-to-begin {
-  text-align: center;
-  margin: 20%;
+#dialog-message {
+  font-size: 20px;
+  margin: 20px;
 }
 
 #form {
