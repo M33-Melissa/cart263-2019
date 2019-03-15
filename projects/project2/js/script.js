@@ -16,8 +16,16 @@ let inputSponsor = "";
 let title = "";
 let sponsor = "";
 
+let $circle;
+let randomHeight = "";
+let randomWidth = "";
+let randomXPosition = "";
+let randomYPosition = "";
+
+
 function setup() {
   $('#click-to-begin').on('click',startGame);
+  $circle = $('#circle');
 }
 
 function startGame() {
@@ -27,6 +35,18 @@ function startGame() {
   $('#form').show();
 
   $('#result').show();
+  $circle.show();
+  randomizeCircle();
+}
+
+function randomizeCircle() {
+  randomSize = Math.floor(Math.random()*200) + 50;
+  randomXPosition = Math.floor(Math.random()*380);
+  randomYPosition = Math.floor(Math.random()*100);
+  $circle.css("height", randomSize + "px");
+  $circle.css("width", randomSize + "px");
+  $circle.css("right", randomXPosition + "px");
+  $circle.css("bottom", randomYPosition + "px");
 }
 
 function alterName(name) {
