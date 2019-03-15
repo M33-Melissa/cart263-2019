@@ -46,6 +46,12 @@ body {
   height: 360px;
 }
 
+#background {
+  filter: blur(5px);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 #titleOutput {
   position: absolute;
   padding: 20px;
