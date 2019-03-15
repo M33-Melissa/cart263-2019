@@ -10,7 +10,7 @@ body {
   background: #00B4DB;
   background: linear-gradient(to right, #0083B0, #09caf4);
   color: white;
-  margin: 40px;
+  margin: 20px;
 }
 
 .ui-button {
@@ -18,14 +18,26 @@ body {
   font-size: 1.3em !important;
 }
 
+#border {
+  width: 80%;
+  height: 100%;
+  z-index: -1;
+  border-style: solid;
+  border-width: thick;
+  border-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  padding-top: 0px;
+}
+
 #dialog-message {
   font-size: 20px;
   margin: 20px;
 }
 
+/*============ FORM ============*/
 #form {
 }
-
 #titleButton {
   margin: 35px;
   margin-top: 0px;
@@ -34,6 +46,16 @@ body {
   margin: 35px;
   margin-top: 0px;
 }
+#randomizeTitleButton {
+  margin: 35px;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+#randomizeSponsorButton {
+  margin: 35px;
+  margin-top: 0px;
+  margin-left: 0px;
+}
 #titleInput {
   margin: 30px;
 }
@@ -41,6 +63,7 @@ body {
   margin: 30px;
 }
 
+/*============ THUMBNAIL ============*/
 #result {
   position: relative;
   border-style: solid;
@@ -52,7 +75,7 @@ body {
 }
 
 #background {
-  filter: blur(5px);
+  filter: blur(4px);
   background-position: center;
   background-repeat: no-repeat;
 }

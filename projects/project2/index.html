@@ -27,24 +27,28 @@
 
 <body>
   <!-- HTML would go here if needed. -->
-  <div id="dialog-message" title="Clickbait Thumbnail Generator">
+    <div id="dialog-message" title="Clickbait Thumbnail Generator">
       Generate your own clickbait thumbnail the easy way!
-  </div>
+    </div>
 
-  <h1 hidden>Create Your Own Clickbait Thumbnail!</h1>
+    <div id="border">
+    <h1 hidden>Create Your Own Clickbait Thumbnail!</h1>
 
-  <div id="form" hidden>
-    <textarea name="Title" id="title-input" cols="30" rows="2" placeholder="Title"></textarea>
-    <button id="titleButton" class="ui-button ui-widget ui-corner-all">Submit Title</button></br>
-    <textarea name="Sponsor" id="sponsor-input" cols="30" rows="2" placeholder="Sponsor"></textarea>
-    <button id="sponsorButton" class="ui-button ui-widget ui-corner-all">Submit Sponsor</button></br>
-    <button id="generateButton" class="ui-button ui-widget ui-corner-all">Generate Thumbnail</button>
-  </div>
-  <div id="result" hidden>
-    <img id="background" src="https://picsum.photos/640/360/?random" alt="background">
-    <div id="circle" hidden></div>
-    <div id="titleOutput">Title placeholder ... ... ... ... ...</br></div>
-    <div id="sponsorOutput">Sponsored By </div>
+    <div id="form" hidden>
+      <textarea name="Title" id="title-input" cols="30" rows="2" placeholder="Title"></textarea>
+      <button id="titleButton" class="ui-button ui-widget ui-corner-all">Submit Title</button>
+      <button id="randomizeTitleButton" class="ui-button ui-widget ui-corner-all">Randomize Title</button></br>
+      <textarea name="Sponsor" id="sponsor-input" cols="30" rows="2" placeholder="Sponsor"></textarea>
+      <button id="sponsorButton" class="ui-button ui-widget ui-corner-all">Submit Sponsor</button>
+      <button id="randomizeSponsorButton" class="ui-button ui-widget ui-corner-all">Randomize Title</button></br>
+      <button id="generateButton" class="ui-button ui-widget ui-corner-all">Generate Thumbnail</button>
+    </div>
+    <div id="result" hidden>
+      <img id="background" src="https://picsum.photos/640/360/?random" alt="background">
+      <div id="circle" hidden></div>
+      <div id="titleOutput">Title placeholder ... ... ... ... ...</br></div>
+      <div id="sponsorOutput">Sponsored By </div>
+    </div>
   </div>
 </body>
 
