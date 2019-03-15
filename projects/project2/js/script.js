@@ -57,7 +57,9 @@ function generateThumbnail() {
   });
 
   $circle.show();
-  randomizeCircle();
+
+  $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button></br>').insertAfter("#randomizeBackground");
+  $('#randomizeCircle').on('click', randomizeCircle);
 }
 
 function randomizeCircle() {

@@ -4,6 +4,7 @@ This is the style file for this project.
 
 **********************************************/
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow:700');
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
 body {
   font-family: 'PT Sans Narrow', sans-serif;
@@ -62,6 +63,9 @@ body {
 #sponsorInput {
   margin: 20px;
 }
+#randomizeCircle {
+  margin-left: 100px;
+}
 
 /*============ THUMBNAIL ============*/
 #result {
@@ -81,18 +85,19 @@ body {
 }
 
 #titleOutput {
+  font-family: 'Bowlby One SC', cursive;
   position: absolute;
   padding: 20px;
-  left: 5px;
-  top: 30px;
-  -ms-transform: rotate(-20deg); /* IE 9 */
+  text-align: center;
+  left: 0px;
+  top: 50px;
   -webkit-transform: rotate(-20deg); /* Safari 3-8 */
   transform: rotate(-20deg);
-  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-width: 2.5px;
   -webkit-text-stroke-color: red;
-  font-size: 60px;
+  font-size: 50px;
   height: auto;
-  max-width: 400px;
+  max-width: 450px;
 }
 
 #sponsorOutput {
