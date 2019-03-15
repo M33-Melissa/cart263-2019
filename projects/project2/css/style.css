@@ -36,6 +36,43 @@ body {
   margin: 30px;
 }
 
+#result {
+  position: relative;
+  border-style: solid;
+  border-width: 8px;
+  border-radius: 7px;
+  border-color: white;
+  width: 640px;
+  height: 360px;
+}
+
+#titleOutput {
+  position: absolute;
+  padding: 20px;
+  left: 5px;
+  top: 30px;
+  -ms-transform: rotate(-20deg); /* IE 9 */
+  -webkit-transform: rotate(-20deg); /* Safari 3-8 */
+  transform: rotate(-20deg);
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: red;
+  font-size: 60px;
+  height: auto;
+  max-width: 400px;
+}
+
+#sponsorOutput {
+  position: absolute;
+  height: auto;
+  max-width: 640px;
+  bottom: 0;
+  color: black;
+  font-size: 1.7em;
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: white;
+  padding: 10px;
+}
+
 .ui-button {
   font-family: 'PT Sans Narrow', sans-serif !important;
   font-size: 1.3em !important;

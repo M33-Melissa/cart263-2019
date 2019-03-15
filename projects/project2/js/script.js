@@ -25,6 +25,8 @@ function startGame() {
 
   $('h1').show();
   $('#form').show();
+
+  $('#result').show();
 }
 
 function alterName(name) {
