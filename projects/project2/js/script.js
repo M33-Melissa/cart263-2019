@@ -24,14 +24,12 @@ let randomYPosition = "";
 
 
 function setup() {
-  $('#click-to-begin').on('click',startGame);
-
   $('#dialog-message').dialog({
     modal: true,
     buttons: {
       Begin: function() {
         $(this).dialog('close');
-        startGame();
+        startGenerator();
       }
     }
   });
@@ -39,12 +37,18 @@ function setup() {
   $circle = $('#circle');
 }
 
-function startGame() {
+function startGenerator() {
   $('#click-to-begin').remove();
 
   $('h1').show();
   $('#form').show();
 
+  $('#generateButton').on('click',generateThumbnail);
+
+}
+
+function generateThumbnail() {
+  $('#generateButton').remove();
   $('#result').show();
   $circle.show();
   randomizeCircle();
