@@ -40,16 +40,22 @@ function setup() {
 function startGenerator() {
   $('#click-to-begin').remove();
 
+  $('#border').show();
   $('h1').show();
   $('#form').show();
 
   $('#generateButton').on('click',generateThumbnail);
-
 }
 
 function generateThumbnail() {
   $('#generateButton').remove();
   $('#result').show();
+
+  $('</br><button id="randomizeBackground" class="ui-button ui-widget ui-corner-all">Randomize Background Picture</button></br>').insertAfter("#result");
+  $('#randomizeBackground').on('click', function() {
+    $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
+  });
+
   $circle.show();
   randomizeCircle();
 }

@@ -39,28 +39,28 @@ body {
 #form {
 }
 #titleButton {
-  margin: 35px;
+  margin: 30px;
   margin-top: 0px;
 }
 #sponsorButton {
-  margin: 35px;
+  margin: 30px;
   margin-top: 0px;
 }
 #randomizeTitleButton {
-  margin: 35px;
+  margin: 30px;
   margin-top: 0px;
   margin-left: 0px;
 }
 #randomizeSponsorButton {
-  margin: 35px;
+  margin: 30px;
   margin-top: 0px;
   margin-left: 0px;
 }
 #titleInput {
-  margin: 30px;
+  margin: 20px;
 }
 #sponsorInput {
-  margin: 30px;
+  margin: 20px;
 }
 
 /*============ THUMBNAIL ============*/
