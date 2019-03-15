@@ -3,8 +3,40 @@
 This is the style file for this project.
 
 **********************************************/
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow:700');
+
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+  background: #00B4DB;
+  background: linear-gradient(to right, #0083B0, #09caf4);
+  color: white;
+  margin: 40px;
+}
 
 #click-to-begin {
   text-align: center;
-  margin-top: 45%;
+  margin: 20%;
+}
+
+#form {
+}
+
+#titleButton {
+  margin: 35px;
+  margin-top: 0px;
+}
+#sponsorButton {
+  margin: 35px;
+  margin-top: 0px;
+}
+#titleInput {
+  margin: 30px;
+}
+#sponsorInput {
+  margin: 30px;
+}
+
+.ui-button {
+  font-family: 'PT Sans Narrow', sans-serif !important;
+  font-size: 1.3em !important;
 }
