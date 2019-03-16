@@ -37,6 +37,8 @@ function setup() {
 
   $circle = $('#circle');
   $.getJSON('data/fortune500.json',getSponsor);
+  document.getElementById("title-input").value = "";
+  document.getElementById("sponsor-input").value = "";
 }
 
 function startGenerator() {
@@ -48,13 +50,16 @@ function startGenerator() {
 
   $('#titleButton').on('click', getTitleInput);
   $('#sponsorButton').on('click', getSponsorInput);
+
   $('#generateButton').on('click',generateThumbnail);
 }
 
 function getTitleInput() {
   inputTitle = document.getElementById("title-input").value;
+  title = inputTitle;
   $('#titleOutput').text(inputTitle);
 }
+
 function getSponsorInput() {
   inputSponsor = document.getElementById("sponsor-input").value;
   sponsor = inputSponsor;
@@ -62,17 +67,20 @@ function getSponsorInput() {
 }
 
 function generateThumbnail() {
-  $('#generateButton').remove();
-  $('#result').show();
 
-  $('</br><button id="randomizeBackground" class="ui-button ui-widget ui-corner-all">Randomize Background Picture</button></br>').insertAfter("#result");
-  $('#randomizeBackground').on('click', function() {
-    $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
-  });
+  if(title != "" && sponsor != "") {
+    $('#generateButton').remove();
+    $('#result').show();
 
-  $circle.show();
-  $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button></br>').insertAfter("#randomizeBackground");
-  $('#randomizeCircle').on('click', randomizeCircle);
+    $('</br><button id="randomizeBackground" class="ui-button ui-widget ui-corner-all">Randomize Background Picture</button></br>').insertAfter("#result");
+    $('#randomizeBackground').on('click', function() {
+      $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
+    });
+
+    $circle.show();
+    $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button></br>').insertAfter("#randomizeBackground");
+    $('#randomizeCircle').on('click', randomizeCircle);
+  }
 }
 
 function randomizeCircle() {
