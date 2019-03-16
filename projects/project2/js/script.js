@@ -35,6 +35,7 @@ function setup() {
   });
 
   $circle = $('#circle');
+  $.getJSON('data/fortune500.json',getSponsor);
 }
 
 function startGenerator() {
@@ -72,46 +73,105 @@ function randomizeCircle() {
   $circle.css("bottom", randomYPosition + "px");
 }
 
-function alterName(name) {
-  for (let i = 0; i < title.length; i++) {
-    switch(title.charAt(i)) {
-      case 'B':
-      title.charAt(i) = 'P';
-      break;
-      case 'P':
-      title.charAt(i) = 'B';
-      case 'b':
-      title.charAt(i) = 'p';
-      break;
-      case 'p':
-      title.charAt(i) = 'b';
-      break;
-      case 'M':
-      title.charAt(i) = 'W';
-      break;
-      case 'W':
-      title.charAt(i) = 'M';
-      break;
-      case 'm':
-      title.charAt(i) = 'w';
-      break;
-      case 'w':
-      title.charAt(i) = 'm';
-      break;
-      case 'C':
-      title.charAt(i) = 'K';
-      break;
-      case 'K':
-      title.charAt(i) = 'C';
-      break;
-      case 'c':
-      title.charAt(i) = 'k';
-      break;
-      case 'k':
-      title.charAt(i) = 'c';
-      break;
+
+function getSponsor(spon) {
+
+  $('#randomizeSponsorButton').on('click', function() {
+    sponsor = getRandomElement(spon.companies);
+    console.log(sponsor);
+
+    let sponLength = sponsor.length;
+    let modifSpon = "";
+    for(let i = 0; i < sponLength; i++) {
+      modifSpon += alterName(sponsor.charAt(i));
     }
+
+    modifSpon = exceptionAlter(modifSpon);
+    console.log(modifSpon);
+    $('#sponsorOutput').text("Sponsored by " + modifSpon);
+  });
+}
+
+function getRandomElement(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+//
+//
+// Exception alterations
+function exceptionAlter(spon) {
+  let tempSpon = spon.replace("The", "Dah");
+  spon = tempSpon;
+
+  tempSpon = spon.replace("Au", "O");
+  spon = tempSpon;
+
+  tempSpon = spon.replace("Association", "Ass.");
+  spon = tempSpon;
+
+  tempSpon = spon.replace("America", "Ameriga");
+  spon = tempSpon;
+  return spon;
+}
+
+function alterName(inputSpon) {
+  switch(inputSpon) {
+    case 'B':
+    inputSpon = 'P';
+    break;
+    case 'P':
+    inputSpon = 'B';
+    break;
+    case 'D':
+    inputSpon = 'P';
+    break;
+    case 'M':
+    inputSpon = 'W';
+    break;
+    case 'W':
+    inputSpon = 'M';
+    break;
+    case 'N':
+    inputSpon = 'M';
+    break;
+    case 'C':
+    inputSpon = 'K';
+    break;
+    case 'K':
+    inputSpon = 'C';
+    break;
+    case 'Q':
+    inputSpon = 'K';
+    break;
+    case 'S':
+    inputSpon = 'Sh';
+    break;
+    case 'V':
+    inputSpon = 'W';
+    break;
+    case 'X':
+    inputSpon = 'Ex';
+    break;
+    case 'F':
+    inputSpon = 'V';
+    break;
+    case 'I':
+    inputSpon = 'U';
+    break;
+    case 'G':
+    inputSpon = 'K';
+    break;
+    case 'R':
+    inputSpon = 'L';
+    break;
+    case 'U':
+    inputSpon = 'Yu';
+    break;
+    default:
+    break;
   }
+  return inputSpon;
+  // $('#sponsorOutput').text("Sponsored by " + inputSpon);
 }
 
 function enterTitle() {
