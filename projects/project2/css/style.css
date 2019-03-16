@@ -92,15 +92,16 @@ textarea {
   position: absolute;
   padding: 20px;
   text-align: center;
-  left: -10px;
-  top: 50px;
-  -webkit-transform: rotate(-20deg); /* Safari 3-8 */
-  transform: rotate(-20deg);
+  left: -20px;
+  top: 40px;
+  -webkit-transform: rotate(-15deg); /* Safari 3-8 */
+  transform: rotate(-15deg);
   -webkit-text-stroke-width: 2.5px;
   -webkit-text-stroke-color: red;
-  font-size: 50px;
+  font-size: 35px;
   height: auto;
-  max-width: 450px;
+  max-width: 550px;
+  z-index: 100;
 }
 
 #sponsorOutput {

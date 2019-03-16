@@ -1,10 +1,7 @@
 /*****************
 
-Title of Project
-Author Name
-
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Clickbait Thumbnail Generator
+Melissa Lim
 
 ******************/
 
@@ -14,6 +11,7 @@ $(document).ready(setup);
 let inputTitle = "";
 let inputSponsor = "";
 let title = "";
+let titleAdd = "";
 let sponsor = "";
 let modifiedSpon = "";
 
@@ -22,7 +20,6 @@ let randomHeight = "";
 let randomWidth = "";
 let randomXPosition = "";
 let randomYPosition = "";
-
 
 function setup() {
   $('#dialog-message').dialog({
@@ -37,6 +34,8 @@ function setup() {
 
   $circle = $('#circle');
   $.getJSON('data/fortune500.json',getSponsor);
+  $.getJSON('data/encouraging_words.json',getAdjectives);
+  $.getJSON('data/crash_blossoms.json',getHeadline);
   document.getElementById("title-input").value = "";
   document.getElementById("sponsor-input").value = "";
 }
@@ -67,7 +66,6 @@ function getSponsorInput() {
 }
 
 function generateThumbnail() {
-
   if(title != "" && sponsor != "") {
     $('#generateButton').remove();
     $('#result').show();
@@ -93,6 +91,18 @@ function randomizeCircle() {
   $circle.css("bottom", randomYPosition + "px");
 }
 
+function getAdjectives(adj) {
+
+}
+function getHeadline(hed) {
+  $('#randomizeTitleButton').on('click', function() {
+    titleHed = getRandomElement(hed.crash_blossoms);
+    document.getElementById("title-input").value = titleHed;
+    title = titleHed;
+
+    $('#titleOutput').text(title);
+  });
+}
 
 function getSponsor(spon) {
 
