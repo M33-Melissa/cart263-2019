@@ -39,6 +39,7 @@ body {
 /*============ FORM ============*/
 #form {
 }
+
 #titleButton {
   margin: 30px;
   margin-top: 0px;
@@ -71,6 +72,16 @@ textarea {
 }
 #randomizeEmoji {
   margin-left: 15px;
+}
+#question {
+  margin: 10px;
+  margin-left: 200px;
+  margin-bottom: 0px;
+}
+#exclamation {
+  margin: 10px;
+  margin-left: 50px;
+  margin-bottom: 0px;
 }
 
 /*============ THUMBNAIL ============*/

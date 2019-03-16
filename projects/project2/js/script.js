@@ -14,8 +14,11 @@ let inputSponsor = "";
 let title = "";
 let sponsor = "";
 let modifiedSpon = "";
+
+// Initialize variables for emojis in thumbnail
 let emoji = "";
 let $emoji;
+let respVoice;
 
 // Initialize variables for the circle target randomization of position and size
 let $circle;
@@ -24,100 +27,116 @@ let randomWidth = "";
 let randomXPosition = "";
 let randomYPosition = "";
 
+// setup()
+//
+// Setting up starting dialog message, clicking 'Begin' initializes variables,
+// values, objects, and calls function that starts actual application.
 function setup() {
   $('#dialog-message').dialog({
     modal: true,
     buttons: {
       Begin: function() {
         $(this).dialog('close');
+        // Access 2 out of the 3 JSON libraries used
+        $.getJSON('data/fortune500.json',getSponsor);
+        $.getJSON('data/crash_blossoms.json',getHeadline);
+        // Initialization of some variables, values, and objects
+        respVoice = new ResponsiveVoiceScript();
+        $circle = $('#circle');
+        $emoji = $('#emoji');
+        document.getElementById("title-input").value = "";
+        document.getElementById("sponsor-input").value = "";
+
         startGenerator();
       }
     }
   });
-
-  $circle = $('#circle');
-  $emoji = $('#emoji');
-  $.getJSON('data/fortune500.json',getSponsor);
-  // $.getJSON('data/encouraging_words.json',getAdjectives);
-  $.getJSON('data/crash_blossoms.json',getHeadline);
-  document.getElementById("title-input").value = "";
-  document.getElementById("sponsor-input").value = "";
 }
 
+// startGenerator()
+//
+// Unhides form elements from HTML code
+// Adds submission buttons that call for get functions and generate the thumbnail
 function startGenerator() {
   $('#click-to-begin').remove();
-
+  // Form elements
   $('#border').show();
   $('h1').show();
   $('#form').show();
-
   $('#titleButton').on('click', getTitleInput);
   $('#sponsorButton').on('click', getSponsorInput);
-
+  // When form completed, generate thumbnail
   $('#generateButton').on('click',generateThumbnail);
 }
 
+// generateThumbnail()
+//
+// Thumbnail is created if form is filled properly.
+// Shows Thumbnail Customization UI.
+function generateThumbnail() {
+  // Only generates if the form is filled properly
+  if (title != "" && sponsor != "") {
+    $('#generateButton').remove();
+    // Unhide thumbnail elements
+    $('#result').show();
+    $circle.show();
+    $emoji.show();
+    // Calls for functions that adds buttons for customization
+    randomButtons();
+    addSpice();
+  }
+}
+
+///////////////////////////// Title Functions /////////////////////////////
+
+// getTitleInput()
+//
+// Identifies user input for the Thumbnail title
+// Adds the input title to the thumbnail preview
 function getTitleInput() {
   inputTitle = document.getElementById("title-input").value;
   title = inputTitle;
   $('#titleOutput').text(inputTitle);
 }
 
-function getSponsorInput() {
-  inputSponsor = document.getElementById("sponsor-input").value;
-  sponsor = inputSponsor;
-  modifySponsor();
-}
-
-function generateThumbnail() {
-  if(title != "" && sponsor != "") {
-    $('#generateButton').remove();
-    $('#result').show();
-
-    $('</br><button id="randomizeBackground" class="ui-button ui-widget ui-corner-all">Randomize Background Picture</button></br>').insertAfter("#result");
-    $('#randomizeBackground').on('click', function() {
-      $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
-    });
-
-    $circle.show();
-    $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button></br>').insertAfter("#randomizeBackground");
-    $('#randomizeCircle').on('click', randomizeCircle);
-
-    $emoji.show();
-    $('<button id="randomizeEmoji" class="ui-button ui-widget ui-corner-all">Randomize Emoji</button></br>').insertAfter("#randomizeCircle");
-    $.getJSON('data/emoji.json',getEmoji);
-  }
-}
-
-function getEmoji(emo) {
-  $('#randomizeEmoji').on('click', function() {
-    emoji = getRandomElement(emo.emoji);
-    $emoji.text(emoji);
-  });
-}
-
-function randomizeCircle() {
-  randomSize = Math.floor(Math.random()*190) + 70;
-  randomXPosition = Math.floor(Math.random()*380);
-  randomYPosition = Math.floor(Math.random()*90);
-  $circle.css("height", randomSize + "px");
-  $circle.css("width", randomSize + "px");
-  $circle.css("right", randomXPosition + "px");
-  $circle.css("bottom", randomYPosition + "px");
-}
-
+// getTitleInput()
+//
+// If the randomize title button is clicked:
+// Takes random element from JSON "crash_blossoms" (misleading headlines) array.
+// Adjusts info in title textarea.
+// Adds the randomized title to the thumbnail preview.
 function getHeadline(hed) {
   $('#randomizeTitleButton').on('click', function() {
     let titleHed = getRandomElement(hed.crash_blossoms);
     document.getElementById("title-input").value = titleHed;
     title = titleHed;
-
     $('#titleOutput').text(title);
   });
 }
 
-function getSponsor(spon) {
+////////////////////////// Sponsor Functions //////////////////////////
 
+// getSponsorInput()
+//
+// Identifies user input for the Sponsor Company
+// Uses regex fonction to capitalize the first letter of the Sponsor input.
+// Calls function modifySponsor() to modify the given company name.
+function getSponsorInput() {
+  inputSponsor = document.getElementById("sponsor-input").value;
+  sponsor = inputSponsor.replace(/(\b)([a-zA-Z])/g, function(firstLetter) {
+    return firstLetter.toUpperCase();
+  });
+  modifySponsor();
+}
+
+// getSponsor(spon)
+//
+// If the randomize sponsor button is clicked:
+// Takes a random element from JSON companies array.
+// Adjusts info in sponsor textarea.
+// Calls function modifySponsor() to modify the randomized company name.
+function getSponsor(spon) {
+  // Function activates on click of the randomize sponsor button
   $('#randomizeSponsorButton').on('click', function() {
     sponsor = getRandomElement(spon.companies);
     document.getElementById("sponsor-input").value = sponsor;
@@ -125,36 +144,28 @@ function getSponsor(spon) {
   });
 }
 
+// modifySponsor
+//
+// Takes the sponsor name and decides character by character, which one to alter
+// using the function alterName(inputSpon) and also exceptionAlter(modifiedSpon)
+// for exception modifications.
+// Outputs final sponsor line to Thumbnail preview
 function modifySponsor() {
+  // clears modified spon every input to avoid concatenation
   modifiedSpon = "";
+
   for (let i = 0; i < sponsor.length; i++) {
     modifiedSpon += alterName(sponsor.charAt(i));
   }
-
   modifiedSpon = exceptionAlter(modifiedSpon);
+
+  // Final Ouput to Thumbnail Sponsor Title
   $('#sponsorOutput').text("Sponsored by " + modifiedSpon);
 }
 
+// alterName(inputSpon)
 //
-//
-// Exception alterations
-function exceptionAlter(spon) {
-  let tempSpon = spon.replace("The", "Dah");
-  spon = tempSpon;
-  tempSpon = spon.replace("Au", "O");
-  spon = tempSpon;
-  tempSpon = spon.replace("Association", "Ass.");
-  spon = tempSpon;
-  tempSpon = spon.replace("America", "Ameriga");
-  spon = tempSpon;
-  tempSpon = spon.replace("&", "N");
-  spon = tempSpon;
-  return spon;
-}
-
-//
-//
-//
+// Takes given sponsor name, replaces letters in case by case (in switch case)
 function alterName(inputSpon) {
   switch(inputSpon) {
     case 'B':
@@ -217,22 +228,89 @@ function alterName(inputSpon) {
   return inputSpon;
 }
 
-function enterTitle() {
-  let denyTitle = 'This title has forbidden words, would you like to use '+ title +' instead?';
-  responsiveVoice.speak(denyTitle,'UK English Female',options);
+// exceptionAlter(spon)
+//
+// Takes the sponsor name in argument, specific cases to replace parts of string
+function exceptionAlter(spon) {
+  let tempSpon = spon.replace("The", "Dah");
+  spon = tempSpon;
+  tempSpon = spon.replace("Au", "O");
+  spon = tempSpon;
+  tempSpon = spon.replace("Association", "Ass.");
+  spon = tempSpon;
+  tempSpon = spon.replace("America", "Ameriga");
+  spon = tempSpon;
+  tempSpon = spon.replace("&", "N");
+  spon = tempSpon;
+  return spon;
 }
 
-function enterSponsor() {
-  responsiveVoice.speak(denySponsor,'UK English Female',options);
-  let denySponsor = 'This brand has cancelled the sponsorship you, would you rather be sponsored by '+ sponsorSuggestion +' are willing to work with you instead.';
+///////////////////// Thumbnail Customization Buttons /////////////////////
+
+// randomButtons()
+//
+// Creates buttons for randomized customization of thumbnail aesthetics
+// (Background, Circle, and Emoji)
+function randomButtons() {
+  // Button that activates background image randomization
+  $('</br><button id="randomizeBackground" class="ui-button ui-widget ui-corner-all">Randomize Background Picture</button>').insertAfter("#result");
+  $('#randomizeBackground').on('click', function() {
+    // Code to make the image page refresh on every click
+    $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
+  });
+
+  // Button that activates circle position/size randomization
+  $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button>').insertAfter("#randomizeBackground");
+  $('#randomizeCircle').on('click', randomizeCircle);
+
+  // Button that activates emoji randomization
+  $('<button id="randomizeEmoji" class="ui-button ui-widget ui-corner-all">Randomize Emoji</button>').insertAfter("#randomizeCircle");
+  $.getJSON('data/emoji.json',getEmoji);
 }
 
-function completeForm() {
-  let completion = 'Your Generated Thumbnail is Complete';
-  responsiveVoice.speak(completion,'UK English Female',options);
+// randomizeCircle()
+//
+// Randomizes css elements (size and position) of circle using Math.random functions.
+function randomizeCircle() {
+  randomSize = Math.floor(Math.random()*190) + 70;
+  randomXPosition = Math.floor(Math.random()*380);
+  randomYPosition = Math.floor(Math.random()*90);
+  $circle.css("height", randomSize + "px");
+  $circle.css("width", randomSize + "px");
+  $circle.css("right", randomXPosition + "px");
+  $circle.css("bottom", randomYPosition + "px");
 }
 
+// getEmoji(emo)
+//
+// Randomizes emoji on button click and updates it on the thumbnail.
+function getEmoji(emo) {
+  $('#randomizeEmoji').on('click', function() {
+    emoji = getRandomElement(emo.emoji);
+    $emoji.text(emoji);
+  });
+}
 
+// addSpice()
+//
+// Creates button for customization at end of title.
+// Adds question marks and exclamation marks, on every click.
+function addSpice() {
+  // Add button that adds question marks
+  $('</br><button id="question" class="ui-button ui-widget ui-corner-all">Add ❔</button>').insertAfter("#randomizeEmoji");
+  $('#question').on('click', function() {
+    $('#titleOutput').append("?");
+  });
+  // Add button that adds exclamation marks
+  $('<button id="exclamation" class="ui-button ui-widget ui-corner-all">Add ❕</button>').insertAfter("#question");
+  $('#exclamation').on('click', function() {
+    $('#titleOutput').append("!");
+  });
+}
+
+// getRandomElement(arr)
+//
+// Takes an array in argument and returns a random item of the array
 function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }

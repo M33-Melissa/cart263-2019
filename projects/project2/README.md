@@ -13,10 +13,10 @@ The narrative of the situation would be that you are a YouTuber working with a c
 
 This project was a challenge. I found it very difficult to find ideas to associate to the subject. Therefore, I ended up making something very closely related to the article, rather than indirectly referencing it.
 
-Reference
+References
 https://github.com/dariusk/corpora/blob/master/data/corporations/fortune500.json
-https://github.com/dariusk/corpora/blob/master/data/words/encouraging_words.json
 https://github.com/dariusk/corpora/blob/master/data/words/crash_blossoms.json
+https://github.com/dariusk/corpora/blob/master/data/words/emoji/emoji.json
 https://picsum.photos/
 https://fonts.google.com/specimen/PT+Sans+Narrow
 https://fonts.google.com/specimen/Bowlby+One+SC?selection.family=Bowlby+One+SC
