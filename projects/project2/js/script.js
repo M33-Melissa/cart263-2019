@@ -3,6 +3,19 @@
 Clickbait Thumbnail Generator
 Melissa Lim
 
+This application is made as a commentary the trend of "clickbait" images and titles.
+It creates a form to fill with a Title and a Sponsor company name.
+Both of these can also be randomized from a JSON library of headlines and companies.
+When the form is filled, the thumbnail can be generated.
+The thumbnail is generated with a background, an emoji, and a red circle that can all be randomized.
+Two buttons are added to concatenate question marks and exclamation marks at the end of the title.
+The sponsor company name is taken and modified to change the capitalized letters.
+This creates a new company name that is like a parody of the original.
+Because in the narrative, the original companies wouldn't want to work with you.
+
+Responsive voice is used to narrate through the process and encourages you to interact
+with the application.
+
 ******************/
 
 // Get setup
