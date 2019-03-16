@@ -59,6 +59,7 @@ function setup() {
 // Adds submission buttons that call for get functions and generate the thumbnail
 function startGenerator() {
   $('#click-to-begin').remove();
+  respVoice.start();
   // Form elements
   $('#border').show();
   $('h1').show();
@@ -76,6 +77,7 @@ function startGenerator() {
 function generateThumbnail() {
   // Only generates if the form is filled properly
   if (title != "" && sponsor != "") {
+    respVoice.completeForm();
     $('#generateButton').remove();
     // Unhide thumbnail elements
     $('#result').show();
@@ -84,6 +86,8 @@ function generateThumbnail() {
     // Calls for functions that adds buttons for customization
     randomButtons();
     addSpice();
+  } else {
+    respVoice.fillForm();
   }
 }
 
@@ -96,6 +100,9 @@ function generateThumbnail() {
 function getTitleInput() {
   inputTitle = document.getElementById("title-input").value;
   title = inputTitle;
+  if (title != "") {
+    respVoice.impressive(title);
+  }
   $('#titleOutput').text(inputTitle);
 }
 
@@ -110,6 +117,7 @@ function getHeadline(hed) {
     let titleHed = getRandomElement(hed.crash_blossoms);
     document.getElementById("title-input").value = titleHed;
     title = titleHed;
+    respVoice.impressive(title);
     $('#titleOutput').text(title);
   });
 }
@@ -158,9 +166,13 @@ function modifySponsor() {
     modifiedSpon += alterName(sponsor.charAt(i));
   }
   modifiedSpon = exceptionAlter(modifiedSpon);
-
-  // Final Ouput to Thumbnail Sponsor Title
-  $('#sponsorOutput').text("Sponsored by " + modifiedSpon);
+  sponsor = modifiedSpon;
+  if (sponsor != "") {
+    respVoice.enterSponsor(sponsor);
+    // Final Ouput to Thumbnail Sponsor Title
+    sponsor = "Sponsored by " + sponsor;
+  }
+  $('#sponsorOutput').text(sponsor);
 }
 
 // alterName(inputSpon)
@@ -254,10 +266,7 @@ function exceptionAlter(spon) {
 function randomButtons() {
   // Button that activates background image randomization
   $('</br><button id="randomizeBackground" class="ui-button ui-widget ui-corner-all">Randomize Background Picture</button>').insertAfter("#result");
-  $('#randomizeBackground').on('click', function() {
-    // Code to make the image page refresh on every click
-    $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
-  });
+  $('#randomizeBackground').on('click', randomizeBackground);
 
   // Button that activates circle position/size randomization
   $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button>').insertAfter("#randomizeBackground");
@@ -268,10 +277,20 @@ function randomButtons() {
   $.getJSON('data/emoji.json',getEmoji);
 }
 
+// randomizeBackground()
+//
+// Refreshes the picsum image page to generate a new random image
+function randomizeBackground() {
+  respVoice.surprised();
+  // Code to make the image page refresh on every click
+  $("img").attr("src", "https://picsum.photos/640/360/?random?t=" + new Date().getTime());
+}
+
 // randomizeCircle()
 //
 // Randomizes css elements (size and position) of circle using Math.random functions.
 function randomizeCircle() {
+  respVoice.interesting();
   randomSize = Math.floor(Math.random()*190) + 70;
   randomXPosition = Math.floor(Math.random()*380);
   randomYPosition = Math.floor(Math.random()*90);
@@ -286,6 +305,7 @@ function randomizeCircle() {
 // Randomizes emoji on button click and updates it on the thumbnail.
 function getEmoji(emo) {
   $('#randomizeEmoji').on('click', function() {
+    respVoice.really();
     emoji = getRandomElement(emo.emoji);
     $emoji.text(emoji);
   });
@@ -299,11 +319,13 @@ function addSpice() {
   // Add button that adds question marks
   $('</br><button id="question" class="ui-button ui-widget ui-corner-all">Add ❔</button>').insertAfter("#randomizeEmoji");
   $('#question').on('click', function() {
+    respVoice.confused();
     $('#titleOutput').append("?");
   });
   // Add button that adds exclamation marks
   $('<button id="exclamation" class="ui-button ui-widget ui-corner-all">Add ❕</button>').insertAfter("#question");
   $('#exclamation').on('click', function() {
+    respVoice.amazed();
     $('#titleOutput').append("!");
   });
 }
