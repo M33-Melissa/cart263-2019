@@ -15,6 +15,7 @@ let inputTitle = "";
 let inputSponsor = "";
 let title = "";
 let sponsor = "";
+let modifiedSpon = "";
 
 let $circle;
 let randomHeight = "";
@@ -45,7 +46,19 @@ function startGenerator() {
   $('h1').show();
   $('#form').show();
 
+  $('#titleButton').on('click', getTitleInput);
+  $('#sponsorButton').on('click', getSponsorInput);
   $('#generateButton').on('click',generateThumbnail);
+}
+
+function getTitleInput() {
+  inputTitle = document.getElementById("title-input").value;
+  $('#titleOutput').text(inputTitle);
+}
+function getSponsorInput() {
+  inputSponsor = document.getElementById("sponsor-input").value;
+  sponsor = inputSponsor;
+  modifySponsor();
 }
 
 function generateThumbnail() {
@@ -58,7 +71,6 @@ function generateThumbnail() {
   });
 
   $circle.show();
-
   $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button></br>').insertAfter("#randomizeBackground");
   $('#randomizeCircle').on('click', randomizeCircle);
 }
@@ -78,22 +90,19 @@ function getSponsor(spon) {
 
   $('#randomizeSponsorButton').on('click', function() {
     sponsor = getRandomElement(spon.companies);
-    console.log(sponsor);
-
-    let sponLength = sponsor.length;
-    let modifSpon = "";
-    for(let i = 0; i < sponLength; i++) {
-      modifSpon += alterName(sponsor.charAt(i));
-    }
-
-    modifSpon = exceptionAlter(modifSpon);
-    console.log(modifSpon);
-    $('#sponsorOutput').text("Sponsored by " + modifSpon);
+    document.getElementById("sponsor-input").value = sponsor;
+    modifySponsor();
   });
 }
 
-function getRandomElement(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function modifySponsor() {
+  modifiedSpon = "";
+  for (let i = 0; i < sponsor.length; i++) {
+    modifiedSpon += alterName(sponsor.charAt(i));
+  }
+
+  modifiedSpon = exceptionAlter(modifiedSpon);
+  $('#sponsorOutput').text("Sponsored by " + modifiedSpon);
 }
 
 //
@@ -102,18 +111,18 @@ function getRandomElement(arr) {
 function exceptionAlter(spon) {
   let tempSpon = spon.replace("The", "Dah");
   spon = tempSpon;
-
   tempSpon = spon.replace("Au", "O");
   spon = tempSpon;
-
   tempSpon = spon.replace("Association", "Ass.");
   spon = tempSpon;
-
   tempSpon = spon.replace("America", "Ameriga");
   spon = tempSpon;
   return spon;
 }
 
+//
+//
+//
 function alterName(inputSpon) {
   switch(inputSpon) {
     case 'B':
@@ -167,11 +176,13 @@ function alterName(inputSpon) {
     case 'U':
     inputSpon = 'Yu';
     break;
+    case 'O':
+    inputSpon = 'Au';
+    break;
     default:
     break;
   }
   return inputSpon;
-  // $('#sponsorOutput').text("Sponsored by " + inputSpon);
 }
 
 function enterTitle() {
@@ -187,4 +198,9 @@ function enterSponsor() {
 function completeForm() {
   let completion = 'Your Generated Thumbnail is Complete';
   responsiveVoice.speak(completion,'UK English Female',options);
+}
+
+
+function getRandomElement(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }

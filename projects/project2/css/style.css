@@ -57,6 +57,9 @@ body {
   margin-top: 0px;
   margin-left: 0px;
 }
+textarea {
+  font-size: 20px;
+}
 #titleInput {
   margin: 20px;
 }
@@ -89,7 +92,7 @@ body {
   position: absolute;
   padding: 20px;
   text-align: center;
-  left: 0px;
+  left: -10px;
   top: 50px;
   -webkit-transform: rotate(-20deg); /* Safari 3-8 */
   transform: rotate(-20deg);
