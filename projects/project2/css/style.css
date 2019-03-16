@@ -67,7 +67,10 @@ textarea {
   margin: 20px;
 }
 #randomizeCircle {
-  margin-left: 100px;
+  margin-left: 15px;
+}
+#randomizeEmoji {
+  margin-left: 15px;
 }
 
 /*============ THUMBNAIL ============*/
@@ -94,7 +97,7 @@ textarea {
   text-align: center;
   left: -20px;
   top: 40px;
-  -webkit-transform: rotate(-15deg); /* Safari 3-8 */
+  -webkit-transform: rotate(-15deg);
   transform: rotate(-15deg);
   -webkit-text-stroke-width: 2.5px;
   -webkit-text-stroke-color: red;
@@ -118,13 +121,25 @@ textarea {
 
 #circle {
   position: absolute;
-  height: 60px;
-  width: 60px;
-  right: 0px;
-  bottom: 0px;
+  height: 120px;
+  width: 120px;
+  right: 100px;
+  bottom: 70px;
   border-style: solid;
   border-width: 10px;
   border-radius: 1000px;
   border-color:red;
-  margin: 20px;
+  margin: 10px;
+}
+
+#emoji {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  left: -15px;
+  top: 0px;
+  font-size: 90px;
+  margin: 10px;
+  -webkit-transform: rotate(-15deg);
+  transform: rotate(-15deg);
 }

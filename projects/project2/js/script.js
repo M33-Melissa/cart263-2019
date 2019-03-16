@@ -8,13 +8,16 @@ Melissa Lim
 // Get setup
 $(document).ready(setup);
 
+// Initialize variables for form results (title and sponsor)
 let inputTitle = "";
 let inputSponsor = "";
 let title = "";
-let titleAdd = "";
 let sponsor = "";
 let modifiedSpon = "";
+let emoji = "";
+let $emoji;
 
+// Initialize variables for the circle target randomization of position and size
 let $circle;
 let randomHeight = "";
 let randomWidth = "";
@@ -33,8 +36,9 @@ function setup() {
   });
 
   $circle = $('#circle');
+  $emoji = $('#emoji');
   $.getJSON('data/fortune500.json',getSponsor);
-  $.getJSON('data/encouraging_words.json',getAdjectives);
+  // $.getJSON('data/encouraging_words.json',getAdjectives);
   $.getJSON('data/crash_blossoms.json',getHeadline);
   document.getElementById("title-input").value = "";
   document.getElementById("sponsor-input").value = "";
@@ -78,25 +82,33 @@ function generateThumbnail() {
     $circle.show();
     $('<button id="randomizeCircle" class="ui-button ui-widget ui-corner-all">Randomize Target</button></br>').insertAfter("#randomizeBackground");
     $('#randomizeCircle').on('click', randomizeCircle);
+
+    $emoji.show();
+    $('<button id="randomizeEmoji" class="ui-button ui-widget ui-corner-all">Randomize Emoji</button></br>').insertAfter("#randomizeCircle");
+    $.getJSON('data/emoji.json',getEmoji);
   }
 }
 
+function getEmoji(emo) {
+  $('#randomizeEmoji').on('click', function() {
+    emoji = getRandomElement(emo.emoji);
+    $emoji.text(emoji);
+  });
+}
+
 function randomizeCircle() {
-  randomSize = Math.floor(Math.random()*200) + 50;
+  randomSize = Math.floor(Math.random()*190) + 70;
   randomXPosition = Math.floor(Math.random()*380);
-  randomYPosition = Math.floor(Math.random()*100);
+  randomYPosition = Math.floor(Math.random()*90);
   $circle.css("height", randomSize + "px");
   $circle.css("width", randomSize + "px");
   $circle.css("right", randomXPosition + "px");
   $circle.css("bottom", randomYPosition + "px");
 }
 
-function getAdjectives(adj) {
-
-}
 function getHeadline(hed) {
   $('#randomizeTitleButton').on('click', function() {
-    titleHed = getRandomElement(hed.crash_blossoms);
+    let titleHed = getRandomElement(hed.crash_blossoms);
     document.getElementById("title-input").value = titleHed;
     title = titleHed;
 
@@ -134,6 +146,8 @@ function exceptionAlter(spon) {
   tempSpon = spon.replace("Association", "Ass.");
   spon = tempSpon;
   tempSpon = spon.replace("America", "Ameriga");
+  spon = tempSpon;
+  tempSpon = spon.replace("&", "N");
   spon = tempSpon;
   return spon;
 }
@@ -210,7 +224,7 @@ function enterTitle() {
 
 function enterSponsor() {
   responsiveVoice.speak(denySponsor,'UK English Female',options);
-  let denySponsor = 'This brand has cancelled the sponsorship you, would you rather be sponsored by '+ sponsorSuggestion +' instead?';
+  let denySponsor = 'This brand has cancelled the sponsorship you, would you rather be sponsored by '+ sponsorSuggestion +' are willing to work with you instead.';
 }
 
 function completeForm() {
