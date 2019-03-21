@@ -55,11 +55,13 @@ function gotData(data) {
   // Same again for room
   let room = getRandomElement(data.rooms);
 
+  let word = getRandomElement(data.encouraging_words);
+
   let det1 = 'a';
   let det2 = 'a';
 
   for (let i = 0; i < vowels.length; i++) {
-    if (cat.charAt(0).toLowerCase() === vowels.charAt(i)) {
+    if (word.charAt(0).toLowerCase() === vowels.charAt(i)) {
       det1 = 'an';
     }
   }
@@ -73,7 +75,7 @@ function gotData(data) {
   // Now we can construct our description with a template string
   // We have the basic structure of a sentence and we substitute in the
   // values we've just calculated
-  let description = `${condiment} ${verb} like ${det1} ${cat} in ${det2} ${room}.`;
+  let description = `${condiment} ${verb} like ${det1} ${word} ${cat} in ${det2} ${room}.`;
 
   // Finally, we add it to the page and hey presto!
   $('body').append(description);
