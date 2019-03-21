@@ -27,6 +27,9 @@ $(document).ready(function() {
   // the location of the file, and a function to call when the data
   // is available...
   $.getJSON('data/data.json', gotData);
+  $('html').on('click', function() {
+    location.reload();
+  })
 });
 
 // gotData (data)
@@ -55,6 +58,7 @@ function gotData(data) {
   // Same again for room
   let room = getRandomElement(data.rooms);
 
+  // Same again for encouraing word
   let word = getRandomElement(data.encouraging_words);
 
   let det1 = 'a';
