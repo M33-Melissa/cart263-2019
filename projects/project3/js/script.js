@@ -8,6 +8,10 @@ author, and this description to match your project!
 
 ******************/
 
-particlesJS.load('particles-js', 'assets/particles.json', function() {
+particlesJS.load('particles-js', 'assets/snow-particles.json', function() {
   console.log('callback - particles.js config loaded');
 });
+
+// particlesJS.load('particles-js', 'assets/rain-particles.json', function() {
+//   console.log('callback - particles.js config loaded');
+// });

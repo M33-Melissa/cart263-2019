@@ -5,5 +5,9 @@ This is the style file for this project.
 **********************************************/
 
 html {
-  background-color: black;
+  /****rain background***/
+  /* background: linear-gradient(to bottom, #4b79a1, #283e51); */
+
+  /***snow background**/
+   background: linear-gradient(to bottom, #83a4d4, #b6fbff);
 }
