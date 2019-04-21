@@ -1,7 +1,7 @@
 {
   "particles": {
     "number": {
-      "value": 300,
+      "value": 50,
       "density": {
         "enable": true,
         "value_area": 800
@@ -20,7 +20,7 @@
         "nb_sides": 5
       },
       "image": {
-        "src": "",
+        "src": "assets/images/question.png",
         "width": 100,
         "height": 100
       }
@@ -36,7 +36,7 @@
       }
     },
     "size": {
-      "value": 3,
+      "value": 20,
       "random": true,
       "anim": {
         "enable": false,
@@ -58,8 +58,8 @@
       "direction": "none",
       "random": true,
       "straight": false,
-      "out_mode": "out",
-      "bounce": false,
+      "out_mode": "bounce",
+      "bounce": true,
       "attract": {
         "enable": false,
         "rotateX": 600,
@@ -72,11 +72,11 @@
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "grab"
+        "mode": "bubble"
       },
       "onclick": {
         "enable": true,
-        "mode": "bubble"
+        "mode": "push"
       },
       "resize": true
     },
@@ -99,7 +99,7 @@
         "duration": 0.4
       },
       "push": {
-        "particles_nb": 4
+        "particles_nb": 2
       },
       "remove": {
         "particles_nb": 2

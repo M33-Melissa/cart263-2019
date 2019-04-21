@@ -18,7 +18,9 @@ function setup() {
   particlesJS.load('particles-js', 'assets/particles.json', function() {});
 
   $('span').on('click', function() {
-    $('#options').remove();
+    $('#options').fadeOut();
+    $('#greeting').fadeOut(1000);
+
     option = this.innerHTML;
     if (option === "Happy") {
       particlesJS.load('particles-js', 'assets/petals-particles.json', function() {
@@ -44,7 +46,7 @@ function setup() {
       particlesJS.load('particles-js', 'assets/leaves-particles.json', function() {
         // $("html").css("background","linear-gradient(to bottom, #c02425, #f0cb35)");
 
-        $("html").css("background","linear-gradient(to bottom, #f4791f, #659999)");
+        $("html").css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
       });
     }
   })
