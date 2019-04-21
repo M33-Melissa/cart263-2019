@@ -16,24 +16,15 @@ let option;
 
 function setup() {
 
-  createCanvas(displayWidth,displayHeight/5);
-
   particlesJS.load('particles-js', 'assets/particles.json', function() {});
 
   $('span').on('click', optionClicked);
-  
-}
 
-// draw()
-//
-// Description of draw()
-
-function draw() {
 }
 
 function optionClicked() {
-  $('#options').fadeOut();
-  $('#greeting').fadeOut(1000);
+  $('#options').fadeOut(1);
+  $('#greeting').fadeOut(500);
 
   option = this.innerHTML;
   if (option === "Happy") {
@@ -61,4 +52,12 @@ function optionClicked() {
       $("html").css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
     });
   }
+
+  $('<span id="back">Change of mood?</span>').insertAfter("#greeting");
+
+  $("#back").on('click', function() {
+      $('#back').fadeOut(50);
+      $('#options').fadeIn(500);
+      $('#greeting').fadeIn(500);
+  })
 }

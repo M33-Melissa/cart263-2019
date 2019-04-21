@@ -10,6 +10,8 @@ html {
   background: linear-gradient(to bottom, #000000, #434343);
   min-height: 100%;
   overflow: hidden;
+  background-color: transparent;
+  color: white;
   padding: 0;
   margin: 0;
 }
@@ -18,6 +20,8 @@ html {
   position: fixed;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
   z-index: -1;
 }
 
@@ -28,11 +32,15 @@ html {
   color: white;
   padding: 20px;
   z-index: 1;
+  position: absolute;
+}
+#greeting:hover {
+  cursor: default;
 }
 
 #options {
   animation: opac 2s;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-top: 15%;
   width: 100%;
   height: 2em;
@@ -40,9 +48,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
-  color: white;
-  z-index: 1;
+  z-index: 2;
   flex-wrap: wrap;
 }
 
@@ -55,7 +61,20 @@ html {
 }
 
 span {
+  animation: opac 3s;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+#options span {
   padding: 50px;
+}
+
+#back:hover {
+  cursor: pointer;
 }
 
 canvas {
