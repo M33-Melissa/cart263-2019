@@ -56,7 +56,9 @@ function mousePressed() {
   // When the mouse is pressed we toggle the variable tracking fullscreen
   isFullScreen = !isFullScreen;
   // And set fullscreen to the result
-  fullscreen(isFullScreen);
+  if(isFullScreen === false) {
+    fullscreen(true);
+  }
   // Now we calculate the desired height of the canvas based on whether we're
   // in fullscreen (and want displayHeight) or not (and want the regular height)
   var newHeight = 0;
