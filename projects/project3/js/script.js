@@ -14,8 +14,6 @@ $(document).ready(setup);
 
 let option;
 
-var isFullScreen = false;
-
 function setup() {
   createCanvas(displayWidth,displayHeight/5);
   particlesJS.load('particles-js', 'assets/particles.json', function() {});
@@ -51,28 +49,6 @@ function setup() {
       });
     }
   })
-}
-function mousePressed() {
-  // When the mouse is pressed we toggle the variable tracking fullscreen
-  isFullScreen = !isFullScreen;
-  // And set fullscreen to the result
-  if(isFullScreen === false) {
-    fullscreen(true);
-  }
-  // Now we calculate the desired height of the canvas based on whether we're
-  // in fullscreen (and want displayHeight) or not (and want the regular height)
-  var newHeight = 0;
-  if (isFullScreen) {
-    newHeight = displayHeight;
-  }
-  else {
-    newHeight = height;
-  }
-  // Finally, using p5.dom's style() method we set the height and width of the
-  // canvas element to the new height
-  canvas.style("height:" + newHeight + "px");
-  // And we calculate and set the width based on the ratio
-  canvas.style("width:" + newHeight * canvasRatio + "px");
 }
 
 // draw()
