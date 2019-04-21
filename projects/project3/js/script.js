@@ -56,4 +56,11 @@ function setup() {
 // Description of draw()
 
 function draw() {
+    // Now we calculate the desired height of the canvas
+    var newHeight = displayHeight;
+    // Finally, using p5.dom's style() method we set the height and width of the
+    // canvas element to the new height
+    canvas.style("height:" + newHeight + "px");
+    // And we calculate and set the width based on the ratio
+    canvas.style("width:" + newHeight * canvasRatio + "px");
 }
