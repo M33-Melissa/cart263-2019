@@ -17,7 +17,6 @@ let windowHeight;
 let windowWidth;
 
 let map;
-let platforms;
 let player;
 let cursors;
 let config = {
@@ -37,7 +36,7 @@ let config = {
     update: update
   },
   "transparent": true,
-  "render.autoResize": true,
+  "render.autoResize": false,
 
 };
 let game = new Phaser.Game(config);
@@ -50,11 +49,9 @@ function setup() {
 
   windowHeight = $(window).height();
   windowWidth = $(window).width();
-  $("#platform");
 }
 
 function preload() {
-  this.load.image('ground', 'assets/images/platform.png');
   this.load.spritesheet(
     'player',
     'assets/images/player.png',
@@ -63,9 +60,6 @@ function preload() {
 }
 
 function create() {
-  platforms = this.physics.add.staticGroup();
-
-  platforms.create(windowWidth/2, windowHeight*1.55, 'ground').setScale(5).refreshBody();
 
   //Adds player sprite
   player = this.physics.add.sprite(30,windowHeight*1.4, 'player');
@@ -95,7 +89,6 @@ function create() {
 
 
   cursors = this.input.keyboard.createCursorKeys();
-  this.physics.add.collider(player, platforms);
 }
 
 function update() {
