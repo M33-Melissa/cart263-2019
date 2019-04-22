@@ -26,4 +26,5 @@ Happy: [Overworld Theme - Super Mario Land](https://youtu.be/Gb33Qnbw520)</br>
 Gloomy: [1 AM Animal Crossing New Leaf - Night Ambiance Sound](https://youtu.be/9N4Nd0Ct5yU)</br>
 Nostalgic: [Stardew Valley OST - Fall (Raven's Descent)](https://youtu.be/idOmc35hlhU)</br>
 Chilly: [Animal Crossing (Winter) - Mario Kart 8 OST](https://youtu.be/VT-wsn9v7yk)</br>
-Thoughtful: [To the Gateway - Super Mario Galaxy](https://youtu.be/zcjtjGCWDGY)
+Thoughtful: [To the Gateway - Super Mario Galaxy](https://youtu.be/zcjtjGCWDGY)</br>
+Submerged: [Dire, Dire Docks - Super Mario 64](https://youtu.be/GBPbJyxqHV0)

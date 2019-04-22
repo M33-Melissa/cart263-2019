@@ -16,7 +16,7 @@ let windowWidth;
 
 // Initialize variables used for audio management
 let audioIsPlaying = false;
-let playlist = [new Audio("assets/sounds/petals.mp3"),new Audio("assets/sounds/rain.mp3"),new Audio("assets/sounds/leaves.mp3"),new Audio("assets/sounds/snow.mp3"),new Audio("assets/sounds/stars.mp3")];
+let playlist = [new Audio("assets/sounds/petals.mp3"),new Audio("assets/sounds/rain.mp3"),new Audio("assets/sounds/leaves.mp3"),new Audio("assets/sounds/snow.mp3"),new Audio("assets/sounds/stars.mp3"), new Audio("assets/sounds/underwater.mp3")];
 let currentScene;
 
 // Initialize platformer game variables
@@ -122,6 +122,15 @@ function sceneManager(option) {
       $('#platformer').css("background","transparent");
       audioManager(playlist[4]);
       currentScene = 4;
+    });
+  }
+
+  if (option === "Submerged") {
+    particlesJS.load('particles-js', 'assets/jsons/fish-particles.json', function() {
+      $html.css("background","linear-gradient(to top, #1a2980, #26d0ce)");
+      $('#platformer').css("background","linear-gradient(to top, #141e30, #243b55)");
+      audioManager(playlist[5]);
+      currentScene = 5;
     });
   }
 }
