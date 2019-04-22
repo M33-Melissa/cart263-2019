@@ -17,6 +17,7 @@ let windowHeight;
 let windowWidth;
 
 let map;
+let platforms;
 let player;
 let cursors;
 let config = {
@@ -52,6 +53,7 @@ function setup() {
 }
 
 function preload() {
+  this.load.image('ground', 'assets/images/platform.png');
   this.load.spritesheet(
     'player',
     'assets/images/player.png',
@@ -60,6 +62,9 @@ function preload() {
 }
 
 function create() {
+  platforms = this.physics.add.staticGroup();
+
+  platforms.create(windowWidth/2, 1159, 'ground').setScale(5).refreshBody();
 
   //Adds player sprite
   player = this.physics.add.sprite(30,windowHeight*1.4, 'player');
@@ -89,19 +94,20 @@ function create() {
 
 
   cursors = this.input.keyboard.createCursorKeys();
+  this.physics.add.collider(player, platforms);
 }
 
 function update() {
 
   if (cursors.left.isDown)
   {
-    player.setVelocityX(-130);
+    player.setVelocityX(-140);
 
     player.anims.play('left', true);
   }
   else if (cursors.right.isDown)
   {
-    player.setVelocityX(130);
+    player.setVelocityX(140);
 
     player.anims.play('right', true);
   }
@@ -145,7 +151,7 @@ function optionClicked() {
   if (option === "Thoughtful") {
     particlesJS.load('particles-js', 'assets/stars-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
-      $("#platformer").css("background","#2c5364");
+      $("#platformer").css("background","transparent");
     });
   }
   if (option === "Nostalgic") {
