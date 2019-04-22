@@ -76,6 +76,15 @@ span {
 #back:hover {
   cursor: pointer;
 }
+#audio {
+  top: 0;
+  left: 97%;
+  position: absolute;
+}
+#audio:hover {
+  cursor: pointer;
+}
+
 
 #platformer {
   width: 100%;

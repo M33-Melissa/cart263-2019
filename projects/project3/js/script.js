@@ -37,14 +37,18 @@ let config = {
 };
 let game = new Phaser.Game(config);
 
+let audioIsPlaying = false;
+let playlist = [new Audio("assets/sounds/petals.mp3"),new Audio("assets/sounds/rain.mp3"),new Audio("assets/sounds/leaves.mp3"),new Audio("assets/sounds/snow.mp3"),new Audio("assets/sounds/stars.mp3")];
+let currentScene;
+
 function setup() {
 
+  windowHeight = $(window).height();
+  windowWidth = $(window).width();
   particlesJS.load('particles-js', 'assets/jsons/particles.json', function() {});
 
   $('span').on('click', optionClicked);
 
-  windowHeight = $(window).height();
-  windowWidth = $(window).width();
 }
 
 function preload() {
@@ -123,12 +127,40 @@ function update() {
 function optionClicked() {
   $('#options').fadeOut(1);
   $('#greeting').fadeOut(500);
+  
+  $('#audio').show();
+
+  $("#audio").on('click', function() {
+    if(audioIsPlaying) {
+      playlist[currentScene].pause();
+      audioIsPlaying = false;
+      this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else {
+
+      playlist[currentScene].play();
+      audioIsPlaying = true;
+      this.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+  });
+  // Add back button
+  $('#back').show();
+
+  // Fade in menu
+  $("#back").on('click', function() {
+    $('#back').fadeOut(50);
+    $('#audio').fadeOut(50);
+    $('#options').fadeIn(500);
+    $('#greeting').fadeIn(500);
+  })
 
   option = this.innerHTML;
+
   if (option === "Happy") {
     particlesJS.load('particles-js', 'assets/jsons/petals-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff)");
       $("#platformer").css("background","linear-gradient(to top, #56ab2f, #a8e063)");
+      audioManager(playlist[0]);
+      currentScene = 0;
     });
   }
 
@@ -136,6 +168,8 @@ function optionClicked() {
     particlesJS.load('particles-js', 'assets/jsons/rain-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #4b79a1, #283e51)");
       $("#platformer").css("background","linear-gradient(to bottom, #485563, #29323c)");
+      audioManager(playlist[1]);
+      currentScene = 1;
     });
   }
 
@@ -143,6 +177,8 @@ function optionClicked() {
     particlesJS.load('particles-js', 'assets/jsons/leaves-particles.json', function() {
       $("html").css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
       $("#platformer").css("background","linear-gradient(to top, #f12711, #f5af19)");
+      audioManager(playlist[2]);
+      currentScene = 2;
     });
   }
 
@@ -150,6 +186,8 @@ function optionClicked() {
     particlesJS.load('particles-js', 'assets/jsons/snow-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
       $("#platformer").css("background","linear-gradient(to bottom, #b2fefa, #0ed2f7)");
+      audioManager(playlist[3]);
+      currentScene = 3;
     });
   }
 
@@ -157,16 +195,27 @@ function optionClicked() {
     particlesJS.load('particles-js', 'assets/jsons/stars-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
       $("#platformer").css("background","transparent");
+      audioManager(playlist[4]);
+      currentScene = 4;
     });
   }
+}
 
-  // Add back button
-  $('<span id="back">Change of mood?</span>').insertAfter("#greeting");
+function audioManager(music) {
+  if(!audioIsPlaying) {
+    audioIsPlaying = true;
+    music.loop = true;
+    music.volume = 0.1;
+    music.play();
 
-  // Fade in menu
-  $("#back").on('click', function() {
-    $('#back').fadeOut(50);
-    $('#options').fadeIn(500);
-    $('#greeting').fadeIn(500);
-  })
+  } else {
+    for(let i = 0; i < playlist.length; i++) {
+      playlist[i].pause();
+      playlist[i].currentTime = 0;
+    }
+    audioIsPlaying = true;
+    music.loop = true;
+    music.volume = 0.1;
+    music.play();
+  }
 }
