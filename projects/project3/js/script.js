@@ -2,11 +2,8 @@
 
 /*****************
 
-Title of Project
+Mood Assistant
 Melissa Lim
-
-This is a template. You must fill in the title,
-author, and this description to match your project!
 
 ******************/
 
@@ -66,10 +63,10 @@ function create() {
 
   platforms.create(windowWidth/2, 1159, 'ground').setScale(5).refreshBody();
 
-  //Adds player sprite
-  player = this.physics.add.sprite(30,windowHeight*1.4, 'player');
+  // Adds player sprite
+  player = this.physics.add.sprite(30,1000, 'player');
 
-  //Map-bounded
+  // Map-bounded
   player.setCollideWorldBounds(true);
 
   this.anims.create({
@@ -136,24 +133,14 @@ function optionClicked() {
       $("#platformer").css("background","linear-gradient(to top, #56ab2f, #a8e063)");
     });
   }
-  if (option === "Chilly") {
-    particlesJS.load('particles-js', 'assets/snow-particles.json', function() {
-      $("html").css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
-      $("#platformer").css("background","linear-gradient(to bottom, #b2fefa, #0ed2f7)");
-    });
-  }
+
   if (option === "Gloomy") {
     particlesJS.load('particles-js', 'assets/rain-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #4b79a1, #283e51)");
       $("#platformer").css("background","linear-gradient(to bottom, #485563, #29323c)");
     });
   }
-  if (option === "Thoughtful") {
-    particlesJS.load('particles-js', 'assets/stars-particles.json', function() {
-      $("html").css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
-      $("#platformer").css("background","transparent");
-    });
-  }
+
   if (option === "Nostalgic") {
     particlesJS.load('particles-js', 'assets/leaves-particles.json', function() {
       $("html").css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
@@ -161,10 +148,24 @@ function optionClicked() {
     });
   }
 
-  //Add back button
+  if (option === "Chilly") {
+    particlesJS.load('particles-js', 'assets/snow-particles.json', function() {
+      $("html").css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
+      $("#platformer").css("background","linear-gradient(to bottom, #b2fefa, #0ed2f7)");
+    });
+  }
+
+  if (option === "Thoughtful") {
+    particlesJS.load('particles-js', 'assets/stars-particles.json', function() {
+      $("html").css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
+      $("#platformer").css("background","transparent");
+    });
+  }
+
+  // Add back button
   $('<span id="back">Change of mood?</span>').insertAfter("#greeting");
 
-  //Fade in menu
+  // Fade in menu
   $("#back").on('click', function() {
     $('#back').fadeOut(50);
     $('#options').fadeIn(500);
