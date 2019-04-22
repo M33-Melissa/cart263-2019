@@ -77,10 +77,20 @@ span {
   cursor: pointer;
 }
 
-canvas {
+#platformer {
+  width: 100%;
+  height: 33px;
+  background: transparent;
+  z-index: -2;
+  position: absolute;
   bottom: 0;
   left: 0;
+}
+
+canvas {
+  bottom: 0px;
+  left: 0px;
   display: block;
   position: fixed;
-  z-index: -2;
+  z-index: -3;
 }

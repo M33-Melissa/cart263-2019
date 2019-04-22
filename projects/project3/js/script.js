@@ -13,10 +13,24 @@ author, and this description to match your project!
 $(document).ready(setup);
 
 let option;
+let windowHeight;
+let windowWidth;
+
+let map;
+let platforms;
+let player;
+let cursors;
 let config = {
   type: Phaser.AUTO,
   width: 1920,
   height: 1080,
+  physics : {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 500 },
+      debug: false
+    }
+  },
   scene: {
     preload: preload,
     create: create,
@@ -24,13 +38,8 @@ let config = {
   },
   "transparent": true,
   "render.autoResize": true,
-  physics : {
-    default: "arcade"
-  }
-};
-let windowHeight;
-let windowWidth;
 
+};
 let game = new Phaser.Game(config);
 
 function setup() {
@@ -41,19 +50,78 @@ function setup() {
 
   windowHeight = $(window).height();
   windowWidth = $(window).width();
+  $("#platform");
 }
 
 function preload() {
-
-  this.load.image('star', 'assets/images/star.png');
+  this.load.image('ground', 'assets/images/platform.png');
+  this.load.spritesheet(
+    'dude',
+    'assets/images/dude.png',
+    {frameWidth: 32, frameHeight: 48}
+  );
 }
 
 function create() {
-  // this.add.image(windowWidth/2,windowHeight/2, 'star');
+  platforms = this.physics.add.staticGroup();
+
+  platforms.create(windowWidth/2, windowHeight*1.55, 'ground').setScale(5).refreshBody();
+
+  //Adds player sprite
+  player = this.physics.add.sprite(30,windowHeight*1.4, 'dude');
+
+  //Map-bounded
+  player.setCollideWorldBounds(true);
+
+  this.anims.create({
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
+
+  this.anims.create({
+    key: 'turn',
+    frames: [ { key: 'dude', frame: 4 } ],
+    frameRate: 20
+  });
+
+  this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+    frameRate: 10,
+    repeat: -1
+  });
+
+
+  cursors = this.input.keyboard.createCursorKeys();
+  this.physics.add.collider(player, platforms);
 }
 
 function update() {
+  if (cursors.left.isDown)
+  {
+    player.setVelocityX(-160);
 
+    player.anims.play('left', true);
+  }
+  else if (cursors.right.isDown)
+  {
+    player.setVelocityX(160);
+
+    player.anims.play('right', true);
+  }
+  else
+  {
+    player.setVelocityX(0);
+
+    player.anims.play('turn');
+  }
+
+  if (cursors.up.isDown && player.body.touching.down)
+  {
+    player.setVelocityY(-330);
+  }
 }
 
 
@@ -65,26 +133,31 @@ function optionClicked() {
   if (option === "Happy") {
     particlesJS.load('particles-js', 'assets/petals-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff)");
+      $("#platformer").css("background","linear-gradient(to top, #56ab2f, #a8e063)");
     });
   }
   if (option === "Chilly") {
     particlesJS.load('particles-js', 'assets/snow-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
+      $("#platformer").css("background","linear-gradient(to bottom, #b2fefa, #0ed2f7)");
     });
   }
   if (option === "Gloomy") {
     particlesJS.load('particles-js', 'assets/rain-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #4b79a1, #283e51)");
+      $("#platformer").css("background","linear-gradient(to bottom, #485563, #29323c)");
     });
   }
   if (option === "Thoughtful") {
     particlesJS.load('particles-js', 'assets/stars-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
+      $("#platformer").css("background","#2c5364");
     });
   }
   if (option === "Nostalgic") {
     particlesJS.load('particles-js', 'assets/leaves-particles.json', function() {
       $("html").css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
+      $("#platformer").css("background","linear-gradient(to top, #f12711, #f5af19)");
     });
   }
 
