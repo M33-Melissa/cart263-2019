@@ -13,7 +13,6 @@ let option;
 let windowHeight;
 let windowWidth;
 
-let map;
 let platforms;
 let player;
 let cursors;
@@ -35,13 +34,12 @@ let config = {
   },
   "transparent": true,
   "render.autoResize": false,
-
 };
 let game = new Phaser.Game(config);
 
 function setup() {
 
-  particlesJS.load('particles-js', 'assets/particles.json', function() {});
+  particlesJS.load('particles-js', 'assets/jsons/particles.json', function() {});
 
   $('span').on('click', optionClicked);
 
@@ -61,10 +59,10 @@ function preload() {
 function create() {
   platforms = this.physics.add.staticGroup();
 
-  platforms.create(windowWidth/2, 1159, 'ground').setScale(5).refreshBody();
+  platforms.create(windowWidth/2, 1239, 'ground').setScale(10).refreshBody();
 
   // Adds player sprite
-  player = this.physics.add.sprite(30,1000, 'player');
+  player = this.physics.add.sprite(30,1040, 'player');
 
   // Map-bounded
   player.setCollideWorldBounds(true);
@@ -128,35 +126,35 @@ function optionClicked() {
 
   option = this.innerHTML;
   if (option === "Happy") {
-    particlesJS.load('particles-js', 'assets/petals-particles.json', function() {
+    particlesJS.load('particles-js', 'assets/jsons/petals-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff)");
       $("#platformer").css("background","linear-gradient(to top, #56ab2f, #a8e063)");
     });
   }
 
   if (option === "Gloomy") {
-    particlesJS.load('particles-js', 'assets/rain-particles.json', function() {
+    particlesJS.load('particles-js', 'assets/jsons/rain-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #4b79a1, #283e51)");
       $("#platformer").css("background","linear-gradient(to bottom, #485563, #29323c)");
     });
   }
 
   if (option === "Nostalgic") {
-    particlesJS.load('particles-js', 'assets/leaves-particles.json', function() {
+    particlesJS.load('particles-js', 'assets/jsons/leaves-particles.json', function() {
       $("html").css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
       $("#platformer").css("background","linear-gradient(to top, #f12711, #f5af19)");
     });
   }
 
   if (option === "Chilly") {
-    particlesJS.load('particles-js', 'assets/snow-particles.json', function() {
+    particlesJS.load('particles-js', 'assets/jsons/snow-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
       $("#platformer").css("background","linear-gradient(to bottom, #b2fefa, #0ed2f7)");
     });
   }
 
   if (option === "Thoughtful") {
-    particlesJS.load('particles-js', 'assets/stars-particles.json', function() {
+    particlesJS.load('particles-js', 'assets/jsons/stars-particles.json', function() {
       $("html").css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
       $("#platformer").css("background","transparent");
     });
