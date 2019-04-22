@@ -8,8 +8,8 @@ The original idea was to make it an ambient sidescroller, focusing on the journe
 </br>Three libraries were used for this project: particles.js, jQuery, and Phaser 3. The different sceneries are made with JSON libraries containing settings which the particles.js reads and applies to the background. jQuery is used to facilitate the interactivity of the menu. Phaser 3 is used for the platformer game overlay. particlesJS has integrated interactivity where mouse hovers and clicks have different effects on the particles. Each setting was customized to fit the different moods.
 </br>
 </div>
-
-__References__</br>
+</br>
+__Instructions__</br>
 Arrow Keys: Right, Left, Up to move</br>
 Use Mouse to interact with menu and background</br>
 
