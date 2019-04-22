@@ -25,6 +25,7 @@ html {
   z-index: -1;
 }
 
+/*************Menu UI*************/
 #greeting {
   font-size: 2.5em;
   float: left;
@@ -37,7 +38,6 @@ html {
 #greeting:hover {
   cursor: default;
 }
-
 #options {
   animation: opac 2s;
   font-size: 1.5em;
@@ -51,15 +51,9 @@ html {
   z-index: 2;
   flex-wrap: wrap;
 }
-
 #options:hover {
   cursor: pointer;
 }
-
-@keyframes opac {
-  from {opacity:0} to {opacity:1}
-}
-
 span {
   animation: opac 3s;
   top: 0;
@@ -68,23 +62,23 @@ span {
   margin: 0;
   font-size: 1.5em;
 }
-
 #options span {
   padding: 50px;
 }
-
 #back:hover {
   cursor: pointer;
 }
 #audio {
+  animation: opac 3s;
   top: 0;
-  left: 97%;
+  right: 10px;
+  padding: 5px;
+  font-size: 1.5em;
   position: absolute;
 }
 #audio:hover {
   cursor: pointer;
 }
-
 
 #platformer {
   width: 100%;
@@ -97,6 +91,11 @@ span {
   left: 0;
 }
 
+@keyframes opac {
+  from {opacity:0} to {opacity:1}
+}
+
+/****Used by particlesJS and Phaser****/
 canvas {
   bottom: 40px;
   left: 0px;
