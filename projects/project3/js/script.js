@@ -13,6 +13,25 @@ author, and this description to match your project!
 $(document).ready(setup);
 
 let option;
+let config = {
+  type: Phaser.AUTO,
+  width: 1920,
+  height: 1080,
+  scene: {
+    preload: preload,
+    create: create,
+    update: update
+  },
+  "transparent": true,
+  "render.autoResize": true,
+  physics : {
+    default: "arcade"
+  }
+};
+let windowHeight;
+let windowWidth;
+
+let game = new Phaser.Game(config);
 
 function setup() {
 
@@ -20,7 +39,23 @@ function setup() {
 
   $('span').on('click', optionClicked);
 
+  windowHeight = $(window).height();
+  windowWidth = $(window).width();
 }
+
+function preload() {
+
+  this.load.image('star', 'assets/images/star.png');
+}
+
+function create() {
+  // this.add.image(windowWidth/2,windowHeight/2, 'star');
+}
+
+function update() {
+
+}
+
 
 function optionClicked() {
   $('#options').fadeOut(1);
@@ -56,8 +91,8 @@ function optionClicked() {
   $('<span id="back">Change of mood?</span>').insertAfter("#greeting");
 
   $("#back").on('click', function() {
-      $('#back').fadeOut(50);
-      $('#options').fadeIn(500);
-      $('#greeting').fadeIn(500);
+    $('#back').fadeOut(50);
+    $('#options').fadeIn(500);
+    $('#greeting').fadeIn(500);
   })
 }
