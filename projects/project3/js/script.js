@@ -56,9 +56,9 @@ function setup() {
 function preload() {
   this.load.image('ground', 'assets/images/platform.png');
   this.load.spritesheet(
-    'dude',
-    'assets/images/dude.png',
-    {frameWidth: 32, frameHeight: 48}
+    'player',
+    'assets/images/player.png',
+    {frameWidth: 32, frameHeight: 45}
   );
 }
 
@@ -68,28 +68,28 @@ function create() {
   platforms.create(windowWidth/2, windowHeight*1.55, 'ground').setScale(5).refreshBody();
 
   //Adds player sprite
-  player = this.physics.add.sprite(30,windowHeight*1.4, 'dude');
+  player = this.physics.add.sprite(30,windowHeight*1.4, 'player');
 
   //Map-bounded
   player.setCollideWorldBounds(true);
 
   this.anims.create({
     key: 'left',
-    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-    frameRate: 10,
+    frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+    frameRate: 5,
     repeat: -1
   });
 
   this.anims.create({
     key: 'turn',
-    frames: [ { key: 'dude', frame: 4 } ],
-    frameRate: 20
+    frames: [ { key: 'player', frame: 4 } ],
+    frameRate: 10
   });
 
   this.anims.create({
     key: 'right',
-    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-    frameRate: 10,
+    frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
+    frameRate: 5,
     repeat: -1
   });
 
@@ -99,15 +99,16 @@ function create() {
 }
 
 function update() {
+
   if (cursors.left.isDown)
   {
-    player.setVelocityX(-160);
+    player.setVelocityX(-130);
 
     player.anims.play('left', true);
   }
   else if (cursors.right.isDown)
   {
-    player.setVelocityX(160);
+    player.setVelocityX(130);
 
     player.anims.play('right', true);
   }
@@ -161,8 +162,10 @@ function optionClicked() {
     });
   }
 
+  //Add back button
   $('<span id="back">Change of mood?</span>').insertAfter("#greeting");
 
+  //Fade in menu
   $("#back").on('click', function() {
     $('#back').fadeOut(50);
     $('#options').fadeIn(500);
