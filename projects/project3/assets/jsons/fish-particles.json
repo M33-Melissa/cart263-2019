@@ -72,11 +72,11 @@
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "bubble"
+        "mode": "repulse"
       },
       "onclick": {
         "enable": true,
-        "mode": "repulse"
+        "mode": "bubble"
       },
       "resize": true
     },
@@ -88,14 +88,14 @@
         }
       },
       "bubble": {
-        "distance": 200,
-        "size": 50,
-        "duration": 0.3,
+        "distance": 100,
+        "size": 40,
+        "duration": 0.8,
         "opacity": 1,
         "speed": 3
       },
       "repulse": {
-        "distance": 150,
+        "distance": 50,
         "duration": 0.4
       },
       "push": {

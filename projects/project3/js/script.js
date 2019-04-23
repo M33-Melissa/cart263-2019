@@ -5,6 +5,12 @@
 Moodify
 Melissa Lim
 
+Depending on the user's mood, different scenes can be set.
+Scenes are accompanied by particle effects, music, and a platformer game with a walking dog.
+They are set up in the sceneManager() function.
+The library of particlesJS was used for their particle animation and interactivity.
+Phaser 3 was used for the platformer game with physics, colliders, and sprite animations.
+
 ******************/
 
 $(document).ready(setup);
@@ -30,7 +36,7 @@ let config = {
   physics : {
     default: "arcade",
     arcade: {
-      gravity: { y: 500 },
+      gravity: { y: 1100 },
       debug: false
     }
   },
@@ -39,8 +45,7 @@ let config = {
     create: create,
     update: update
   },
-  "transparent": true,
-  "render.autoResize": false,
+  "transparent": true
 };
 let game = new Phaser.Game(config);
 
@@ -80,6 +85,7 @@ function menu() {
 //
 // Takes in argument of option chosen and set up scenes accordingly
 function sceneManager(option) {
+  // Happy scene with petal particles
   if (option === "Happy") {
     particlesJS.load('particles-js', 'assets/jsons/petals-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff)");
@@ -88,7 +94,7 @@ function sceneManager(option) {
       currentScene = 0;
     });
   }
-
+  // Gloomy scene with raindrop particles
   if (option === "Gloomy") {
     particlesJS.load('particles-js', 'assets/jsons/rain-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #4b79a1, #283e51)");
@@ -97,7 +103,7 @@ function sceneManager(option) {
       currentScene = 1;
     });
   }
-
+  // Nostalgic scene with leaf particles
   if (option === "Nostalgic") {
     particlesJS.load('particles-js', 'assets/jsons/leaves-particles.json', function() {
       $html.css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
@@ -106,7 +112,7 @@ function sceneManager(option) {
       currentScene = 2;
     });
   }
-
+  // Chilly scene with snow particles
   if (option === "Chilly") {
     particlesJS.load('particles-js', 'assets/jsons/snow-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
@@ -115,7 +121,7 @@ function sceneManager(option) {
       currentScene = 3;
     });
   }
-
+  // Thougtful scene with star particles
   if (option === "Thoughtful") {
     particlesJS.load('particles-js', 'assets/jsons/stars-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
@@ -124,7 +130,7 @@ function sceneManager(option) {
       currentScene = 4;
     });
   }
-
+  // Submerged scene with fish particles
   if (option === "Submerged") {
     particlesJS.load('particles-js', 'assets/jsons/fish-particles.json', function() {
       $html.css("background","linear-gradient(to top, #1a2980, #26d0ce)");
@@ -236,11 +242,11 @@ function create() {
 function update() {
 
   if (cursors.left.isDown) {
-    player.setVelocityX(-140);
+    player.setVelocityX(-150);
     player.anims.play('left', true);
   }
   else if (cursors.right.isDown) {
-    player.setVelocityX(140);
+    player.setVelocityX(150);
     player.anims.play('right', true);
   }
   else {
@@ -248,6 +254,6 @@ function update() {
     player.anims.play('turn');
   }
   if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-330);
+    player.setVelocityY(-450);
   }
 }
