@@ -29,6 +29,7 @@ let currentScene;
 let platforms;
 let player;
 let cursors;
+let keys;
 let lastPositionLeft = false;
 let config = {
   type: Phaser.AUTO,
@@ -237,6 +238,12 @@ function create() {
 
   // Create variable holding keyboard input
   cursors = this.input.keyboard.createCursorKeys();
+  keys = this.input.keyboard.addKeys({
+    up: 'W',
+    left: 'A',
+    right: 'D',
+    slide: 'SPACE'
+  });
 
   // Set collision between player and platform
   this.physics.add.collider(player, platforms);
@@ -247,24 +254,38 @@ function create() {
 // Update character movement animation and velocity on key press
 function update() {
 
-  if (cursors.left.isDown) {
+  if(cursors.left.isDown || keys.left.isDown) {
     player.setVelocityX(-150);
     player.anims.play('left', true);
     lastPositionLeft = true;
-  }
-  else if (cursors.right.isDown) {
+
+  } else if(cursors.right.isDown || keys.right.isDown) {
     player.setVelocityX(150);
     player.anims.play('right', true);
     lastPositionLeft = false;
+
   } else if(lastPositionLeft) {
     player.setVelocityX(0);
     player.anims.play('turn-left');
-  }
-  else {
+
+  } else {
     player.setVelocityX(0);
     player.anims.play('turn');
   }
-  if (cursors.up.isDown && player.body.touching.down) {
+
+  if((cursors.up.isDown || keys.up.isDown) && player.body.touching.down) {
     player.setVelocityY(-450);
+  }
+
+  if(keys.slide.isDown && player.body.touching.down) {
+    if(lastPositionLeft) {
+      player.setVelocityX(-300);
+      player.anims.play('turn-left');
+
+    } else {
+      player.setVelocityX(300);
+      player.anims.play('turn');
+
+    }
   }
 }
