@@ -29,6 +29,7 @@ let currentScene;
 let platforms;
 let player;
 let cursors;
+let lastPositionLeft = false;
 let config = {
   type: Phaser.AUTO,
   width: 1920,
@@ -223,6 +224,11 @@ function create() {
     frameRate: 10
   });
   this.anims.create({
+    key: 'turn-left',
+    frames: [ { key: 'player', frame: 9 } ],
+    frameRate: 10
+  });
+  this.anims.create({
     key: 'right',
     frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
     frameRate: 5,
@@ -244,10 +250,15 @@ function update() {
   if (cursors.left.isDown) {
     player.setVelocityX(-150);
     player.anims.play('left', true);
+    lastPositionLeft = true;
   }
   else if (cursors.right.isDown) {
     player.setVelocityX(150);
     player.anims.play('right', true);
+    lastPositionLeft = false;
+  } else if(lastPositionLeft) {
+    player.setVelocityX(0);
+    player.anims.play('turn-left');
   }
   else {
     player.setVelocityX(0);
