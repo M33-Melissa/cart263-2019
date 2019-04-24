@@ -9,7 +9,7 @@ Moodify: Modify the Mood</br>
 __Instructions__</br>
 'WASD' Keys: 'D' to move to the left, 'A' to move to the right, and 'W' to jump</br>
 ARROW Keys: Right and Left to move, Up to jump</br>
-SPACE Key: Slide to infinity and beyond!!!!</br>
+SPACEBAR Key: Slide to infinity and beyond!!!!</br>
 Use the MOUSE to hover and click to interact with menu and background</br>
 
 ---
