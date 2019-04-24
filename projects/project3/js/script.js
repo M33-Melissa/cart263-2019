@@ -22,12 +22,16 @@ let windowWidth;
 
 // Initialize variables used for audio management
 let audioIsPlaying = false;
+let audioVolume = 0.1;
 let playlist = [new Audio("assets/sounds/petals.mp3"),new Audio("assets/sounds/rain.mp3"),new Audio("assets/sounds/leaves.mp3"),new Audio("assets/sounds/snow.mp3"),new Audio("assets/sounds/stars.mp3"), new Audio("assets/sounds/underwater.mp3")];
 let currentScene;
 
 // Initialize platformer game variables
 let platforms;
 let player;
+let playerVX = 150;
+let playerVY = 450;
+let playerSlideVX = 300;
 let cursors;
 let keys;
 let lastPositionLeft = false;
@@ -78,7 +82,7 @@ function menu() {
     $('#back').fadeOut(50);
     $('#options').fadeIn(500);
     $('#greeting').fadeIn(500);
-  })
+  });
   // Uses html value of the option that was clicked on to decide which scene to display
   sceneManager(this.innerHTML);
 }
@@ -86,12 +90,15 @@ function menu() {
 // sceneManager(option)
 //
 // Takes in argument of option chosen and set up scenes accordingly
+// Change particles json, background and platform colors, song, and activates audio button on scene selected.
+// Also manages audio, assign a number to the current scene and associate it to a song in the array.
 function sceneManager(option) {
   // Happy scene with petal particles
   if (option === "Happy") {
     particlesJS.load('particles-js', 'assets/jsons/petals-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff)");
       $('#platformer').css("background","linear-gradient(to top, #56ab2f, #a8e063)");
+      $('#audio').html('<i class="fas fa-volume-up"></i>');
       audioManager(playlist[0]);
       currentScene = 0;
     });
@@ -101,6 +108,7 @@ function sceneManager(option) {
     particlesJS.load('particles-js', 'assets/jsons/rain-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #4b79a1, #283e51)");
       $('#platformer').css("background","linear-gradient(to bottom, #485563, #29323c)");
+      $('#audio').html('<i class="fas fa-volume-up"></i>');
       audioManager(playlist[1]);
       currentScene = 1;
     });
@@ -110,6 +118,7 @@ function sceneManager(option) {
     particlesJS.load('particles-js', 'assets/jsons/leaves-particles.json', function() {
       $html.css("background","linear-gradient(to top, #f0cb35, #56ab2f)");
       $('#platformer').css("background","linear-gradient(to top, #f12711, #f5af19)");
+      $('#audio').html('<i class="fas fa-volume-up"></i>');
       audioManager(playlist[2]);
       currentScene = 2;
     });
@@ -119,6 +128,7 @@ function sceneManager(option) {
     particlesJS.load('particles-js', 'assets/jsons/snow-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #83a4d4, #b6fbff)");
       $('#platformer').css("background","linear-gradient(to bottom, #b2fefa, #0ed2f7)");
+      $('#audio').html('<i class="fas fa-volume-up"></i>');
       audioManager(playlist[3]);
       currentScene = 3;
     });
@@ -128,6 +138,7 @@ function sceneManager(option) {
     particlesJS.load('particles-js', 'assets/jsons/stars-particles.json', function() {
       $html.css("background","linear-gradient(to bottom, #0f2027, #203a43, #2c5364)");
       $('#platformer').css("background","transparent");
+      $('#audio').html('<i class="fas fa-volume-up"></i>');
       audioManager(playlist[4]);
       currentScene = 4;
     });
@@ -137,6 +148,7 @@ function sceneManager(option) {
     particlesJS.load('particles-js', 'assets/jsons/fish-particles.json', function() {
       $html.css("background","linear-gradient(to top, #1a2980, #26d0ce)");
       $('#platformer').css("background","linear-gradient(to top, #141e30, #243b55)");
+      $('#audio').html('<i class="fas fa-volume-up"></i>');
       audioManager(playlist[5]);
       currentScene = 5;
     });
@@ -145,36 +157,40 @@ function sceneManager(option) {
 
 // audioManager(music)
 //
-// Assigns which song to play
+// Assigns which song to play to selected scene
 function audioManager(music) {
+  // When no audio is playing, on scene choice, play song
   if(!audioIsPlaying) {
     audioIsPlaying = true;
     music.loop = true;
-    music.volume = 0.1;
+    music.volume = audioVolume;
     music.play();
 
   } else {
+    // When audio is already playing from previous scene, pause it and play the current scene's song
     for(let i = 0; i < playlist.length; i++) {
       playlist[i].pause();
       playlist[i].currentTime = 0;
     }
     audioIsPlaying = true;
     music.loop = true;
-    music.volume = 0.1;
+    music.volume = audioVolume;
     music.play();
   }
 }
 
 // audioButton()
 //
-// Mute and unmute button
+// Mute and unmute button with visual change
 function audioButton() {
+  //When audio is playing, on button click pause song
   if(audioIsPlaying) {
     playlist[currentScene].pause();
     audioIsPlaying = false;
     this.innerHTML = '<i class="fas fa-volume-mute"></i>';
 
   } else {
+    //When no audio is playing, on button click play song
     playlist[currentScene].play();
     audioIsPlaying = true;
     this.innerHTML = '<i class="fas fa-volume-up"></i>';
@@ -255,12 +271,12 @@ function create() {
 function update() {
 
   if(cursors.left.isDown || keys.left.isDown) {
-    player.setVelocityX(-150);
+    player.setVelocityX(-playerVX);
     player.anims.play('left', true);
     lastPositionLeft = true;
 
   } else if(cursors.right.isDown || keys.right.isDown) {
-    player.setVelocityX(150);
+    player.setVelocityX(playerVX);
     player.anims.play('right', true);
     lastPositionLeft = false;
 
@@ -274,16 +290,16 @@ function update() {
   }
 
   if((cursors.up.isDown || keys.up.isDown) && player.body.touching.down) {
-    player.setVelocityY(-450);
+    player.setVelocityY(-playerVY);
   }
 
   if(keys.slide.isDown && player.body.touching.down) {
     if(lastPositionLeft) {
-      player.setVelocityX(-300);
+      player.setVelocityX(-playerSlideVX);
       player.anims.play('turn-left');
 
     } else {
-      player.setVelocityX(300);
+      player.setVelocityX(playerSlideVX);
       player.anims.play('turn');
 
     }

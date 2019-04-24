@@ -7,9 +7,9 @@ Moodify: Modify the Mood</br>
 ---
 
 __Instructions__</br>
-'WASD' Keys: 'D' to move to the left, 'A' to move to the right, and 'W' to jump</br>
-ARROW Keys: Right and Left to move, Up to jump</br>
-SPACEBAR Key: Slide to infinity and beyond!!!!</br>
+'WASD' Keys: 'D' to move dog to the left, 'A' to move dog to the right, and 'W' to make dog jump</br>
+ARROW Keys: Right and Left to move dog, Up to make dog jump</br>
+SPACEBAR Key: Make dog slide on his butt to infinity and beyond!!!!</br>
 Use the MOUSE to hover and click to interact with menu and background</br>
 
 ---
