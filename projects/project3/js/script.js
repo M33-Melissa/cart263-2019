@@ -294,14 +294,16 @@ function update() {
   }
 
   if(keys.slide.isDown && player.body.touching.down) {
-    if(lastPositionLeft) {
-      player.setVelocityX(-playerSlideVX);
-      player.anims.play('turn-left');
+    if(player.body.velocity.x!==0) {
+      if(lastPositionLeft) {
+        player.setVelocityX(-playerSlideVX);
+        player.anims.play('turn-left');
 
-    } else {
-      player.setVelocityX(playerSlideVX);
-      player.anims.play('turn');
+      } else {
+        player.setVelocityX(playerSlideVX);
+        player.anims.play('turn');
 
+      }
     }
   }
 }
