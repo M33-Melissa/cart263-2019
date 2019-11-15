@@ -28,9 +28,7 @@ __Links to some exercises__
 __Links to the projects__
 - [Project 1](https://m33-melissa.github.io/cart263-2019/projects/project1/index.html)
 	- [README](https://github.com/M33-Melissa/cart263-2019/tree/master/projects/project1)
-
 - [Project 2](https://m33-melissa.github.io/cart263-2019/projects/project2/index.html)
 	- [README](https://github.com/M33-Melissa/cart263-2019/tree/master/projects/project2)
-
 - [Project 3](https://m33-melissa.github.io/cart263-2019/projects/project3/index.html)
 	- [README](https://github.com/M33-Melissa/cart263-2019/tree/master/projects/project3)
