@@ -7,10 +7,10 @@ and a __sandbox__.
 
 __Highlights__
 
-- [Project 1](https://m33-melissa.github.io/cart263-2019/projects/project1/index.html)
-	- [README](https://github.com/M33-Melissa/cart263-2019/tree/master/projects/project1)
 - [Project 3](https://m33-melissa.github.io/cart263-2019/projects/project3/index.html)
 	- [README](https://github.com/M33-Melissa/cart263-2019/tree/master/projects/project3)
+- [Project 1](https://m33-melissa.github.io/cart263-2019/projects/project1/index.html)
+	- [README](https://github.com/M33-Melissa/cart263-2019/tree/master/projects/project1)
 
 ---
 
